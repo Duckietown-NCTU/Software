@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [315.4459324315583, 0.0, 344.6080182428725, 0.0, 311.5412027070386, 236.05373232486528,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: porsche/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2814698744970072, 0.059818360810958766, 0.0015434911120223386, -0.0011276686744467249,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [222.04908752441406, 0.0, 341.93716297857463, 0.0, 0.0, 243.6189727783203,
+    235.1962133465322, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3
