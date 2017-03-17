@@ -1,0 +1,49 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{schroff2015facenet}
+F.~Schroff, D.~Kalenichenko, and J.~Philbin, ``Facenet: A unified embedding for
+  face recognition and clustering,'' in \emph{Proceedings of the IEEE
+  Conference on Computer Vision and Pattern Recognition}, 2015, pp. 815--823.
+
+\bibitem{liu2016ssd}
+W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, S.~Reed, C.-Y. Fu, and A.~C. Berg,
+  ``Ssd: Single shot multibox detector,'' in \emph{European Conference on
+  Computer Vision}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2016, pp.
+  21--37.
+
+\bibitem{redmon2016you}
+J.~Redmon, S.~Divvala, R.~Girshick, and A.~Farhadi, ``You only look once:
+  Unified, real-time object detection,'' in \emph{Proceedings of the IEEE
+  Conference on Computer Vision and Pattern Recognition}, 2016, pp. 779--788.
+
+\bibitem{laptev2016ti}
+D.~Laptev, N.~Savinov, J.~M. Buhmann, and M.~Pollefeys, ``Ti-pooling:
+  transformation-invariant pooling for feature learning in convolutional neural
+  networks,'' in \emph{Proceedings of the IEEE Conference on Computer Vision
+  and Pattern Recognition}, 2016, pp. 289--297.
+
+\bibitem{galleguillos2008weakly}
+C.~Galleguillos, B.~Babenko, A.~Rabinovich, and S.~Belongie, ``Weakly
+  supervised object localization with stable segmentations,'' in \emph{European
+  Conference on Computer Vision}.\hskip 1em plus 0.5em minus 0.4em\relax
+  Springer, 2008, pp. 193--207.
+
+\end{thebibliography}
