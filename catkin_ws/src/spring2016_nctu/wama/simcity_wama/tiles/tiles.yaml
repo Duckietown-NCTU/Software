@@ -1,0 +1,112 @@
+# bitmap = image of tile, for debugging or display
+# connectivity = array of arrays of length two 
+# nodes_positions = array of positions, in terms of fraction of length 
+constant_DEFAULT_NODES_POSITIONS: &DEFAULT_NODES_POSITIONS
+ 0: [0, 0.9375] #[0, 15.0/16]
+ 1: [0, 0.8125] #[0, 13.0/16]
+ 2: [0, 0.6875]
+ 3: [0, 0.5625]
+ 4: [0, 0.4375]
+ 5: [0, 0.3125]
+ 6: [0, 0.1875]
+ 7: [0, 0.0625]
+ 8: [0.0625, 0]
+ 9: [0.1875, 0]
+ 10: [0.3125, 0]
+ 11: [0.4375, 0]
+ 12: [0.5625, 0]
+ 13: [0.6875, 0]
+ 14: [0.8125, 0]
+ 15: [0.9375, 0]
+ 16: [1, 0.0625]
+ 17: [1, 0.1875]
+ 18: [1, 0.3125]
+ 19: [1, 0.4375]
+ 20: [1, 0.5625]
+ 21: [1, 0.6875]
+ 22: [1, 0.8125]
+ 23: [1, 0.9375]
+ 24: [0.9375, 1]
+ 25: [0.8125, 1]
+ 26: [0.6875, 1]
+ 27: [0.5625, 1]
+ 28: [0.4375, 1]
+ 29: [0.3125, 1]
+ 30: [0.1875, 1]
+ 31: [0.0625, 1]
+
+
+blank:
+  bitmap: "blank.png"
+  connectivity: []
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_east_west2:
+  bitmap: "road_east_west2.png" # TODO rmata: make the bitmap
+  connectivity: [[5,18], [21,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_north_south3:
+  bitmap: "road_north_south3.png"
+  connectivity: [[10,29]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_north_south2:
+  bitmap: "road_north_south2.png" # TODO rmata
+  connectivity: [[13,26],[29,10]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_south_east2:
+  bitmap: "road_south_east2.png" # TODO rmata
+  connectivity: [[13,18], [21, 10]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_west_south2:
+  bitmap: "road_west_south2.png" # TODO rmata
+  connectivity: [[5,10], [13,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_north_west2:
+  bitmap: "road_north_west2"
+  connectivity: [[5,26], [29,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_east_north2:
+  bitmap: "road_east_north2"
+  connectivity: [[21,26], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_4way_intersection2:
+  bitmap: "road_4way_intersection2"
+  connectivity: [[5,10], [5,18], [5,26], [13,2], [13,18], [13,26], [21,26], [21,2], [21,10], [29,2], [29,10], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_west_south_east2:
+  bitmap: "road_3way_intersection_west_south_east2"
+  connectivity: [[5,10], [5,18], [13,2], [13,18], [21,10], [21,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_north_south_east2:
+  bitmap: "road_3way_intersection_north_south_east2"
+  connectivity: [[13,18], [13,26], [21,10], [21,26], [29,10], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_north_west_south2:
+  bitmap: "road_3way_intersection_north_west_south2"
+  connectivity: [[5,10], [5,26], [13,2], [13,26], [29,2], [29,10]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_north_west_east2:
+  bitmap: "road_3way_intersection_north_west_east2"
+  connectivity: [[5,18], [5,26], [21,2], [21,26], [29,2], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+ 
+#highway_north_south:
+#  bitmap: "highway_north_south.png"
+#  connectivity: [[8,31],[9,30], [10,29],[10,29],[13,26], [13, 26], [14,25], [1#5,24]]
+#  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+#indian_intersection:
+#  bitmap: “indian_intersection.png”
+#  connectivity: "todo (complete)"

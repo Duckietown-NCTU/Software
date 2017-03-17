@@ -1,0 +1,12 @@
+<launch>
+    <arg name="veh" doc="Name of vehicle. ex: megaman"/>
+    <arg name="switch" default="true"/>
+    <arg name="pkg_name" value="duckietown_kaku"/>
+    <arg name="node_name" default="grab"/>
+
+    <group ns="$(arg veh)">   
+	<include if="$(arg switch)" file="$(find duckietown)/machines"/>     
+	<node if="$(arg switch)" machine="$(arg veh)" name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen" clear_params="true" required="true">
+        </node>
+    </group>
+</launch>

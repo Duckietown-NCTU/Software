@@ -12,6 +12,9 @@ porsche911:
   name: Changhyun Choi
   mac: 00:0f:60:06:0a:6a  
 
+trex:
+  name: jerry
+
 leon:
   name: Javier Alonso
 
@@ -191,3 +194,80 @@ pandola:
 
 sonata:
   name: Heejin Ahn
+
+mocap01:
+  name: Motion Capture Unit 1
+  mac: 00:1d:43:20:1a:7e
+
+mocap02:
+  name: Motion Capture Unit 2
+  mac: 00:1d:43:20:1a:89
+
+mocap03:
+  name: Motion Capture Unit 3
+  mac: 00:1d:43:30:1b:ba
+
+mocap04:
+  name: Motion Capture Unit 4
+  mac: 00:1d:43:20:1a:7e
+
+mocap05:
+  name: Motion Capture Unit 5
+  mac: 9c:5c:8e:b2:35:25
+
+mocap06:
+  name: Motion Capture Unit 6
+  mac: 9c:5c:8e:b2:35:2a
+
+mocap07:
+  name: Motion Capture Unit 7
+  mac: 9c:5c:8e:b2:35:28
+
+mocap08:
+  name: Motion Capture Unit 8
+  mac: 9c:5c:8e:b4:2a:17
+
+jcarname:
+  name: Joey Hsia
+
+kaku:
+  name: Chang-Yi Kuo
+
+caroline:
+  name: Chang-Yi Kuo
+
+brick:
+  name: Chang-Yi Kuo
+
+teng:
+  name: Chang-Yi Kuo
+
+cheng:
+  name: Chang-Yi Kuo
+
+redbull:
+  name: Peter
+
+jack:
+  name: Jack 
+
+karissa:
+  name: JihShi Chen     
+
+topbot:
+  name: topbot
+
+soukoban:
+  name: ARG-Car14
+
+agribot:
+  name: ARG-Car18
+
+car15:
+  name: ARG-car15
+
+buyme:
+  name: ARG-car12
+
+hercules:
+  name: hercules

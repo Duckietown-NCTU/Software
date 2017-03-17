@@ -1,0 +1,46 @@
+<launch>
+	<arg name="veh" default="$(env VEHICLE_NAME)"/>
+	<arg name="wheels" default="true"/>
+	<!-- start basic args -->
+	<include file="$(find duckietown_demos)/launch/master.launch">
+	    <arg name="veh" value="$(arg veh)"/>
+	    <arg name="joystick" default="false"/>
+	    <arg name="joy_mapper_param_file_name" value="vehicle_follow"/>
+	    <arg name="fsm" default="false"/>
+		<arg name="visualization" value="false" />
+	    <arg name="verbose" value="false" />
+	    <arg name="statistics" value="false"/>
+	    <arg name="anti_instagram" value="false"/>
+		<arg name="camera" value="true"/>
+        <arg name="/camera/raw" value="false"/>
+	    <arg name="/camera/cam_info" value="true"/>
+	    <arg name="odometry" value="false"/>
+	    <arg name="/odometry/forward_kinematics" value="false"/>
+	    <arg name="lane_following" value="false"/>
+		<arg name="/lane_following/stop_line_filter" value="false" />
+		<arg name="obstacle_avoidance" value="false"/>
+		<arg name="vehicle_avoidance" value="true" />
+		<arg name="/vehicle_avoidance/detection" value="true" />
+	    <arg name="/vehicle_avoidance/control" value="false"/>
+	    <arg name="vehicle_follow" value="true"/>
+		<arg name="apriltags" value="true"/>
+		<arg name="/apriltags/preprocessing" value="true"/>
+		<arg name="/apriltags/global" value="false"/>
+		<arg name="/apriltags/fast" value="true"/>
+		<arg name="/apriltags/postprocessing" value="true"/>
+        <arg name="LED" value="false" />
+	    <arg name="/LED/detector" value="false" />
+	    <arg name="/LED/joystick" value="false" />
+	    <arg name="/LED/emitter"  value="false" />
+	    <arg name="/LED/interpreter" value="false" />
+        <arg name="odometry_learning" value="false"/>
+        <arg name="coordination" value="false"/>
+        <arg name="navigation" value="false"/>
+    	<arg name="parallel_autonomy" value="false"/>
+        <arg name="global_localizer" value="false"/>
+        <arg name="SLAM" value="false"/>
+   		<arg name="wheels" value="$(arg wheels)"/>
+	</include>
+
+</launch>
+

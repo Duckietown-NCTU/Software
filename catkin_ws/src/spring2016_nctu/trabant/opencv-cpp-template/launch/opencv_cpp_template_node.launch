@@ -1,0 +1,16 @@
+<launch>
+  <arg name="veh"/>
+  <arg name="config" default="baseline"/>
+  <arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+  <arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman"/>
+  <arg name="sub_node_name" default="global" doc="Specify if you want to add a subname to the name, e.g. global or fast"/>
+  <arg name="raw" default="false" doc="If set to true, also publish raw image using decoder."/>
+  <arg name="cam_info" default="true" doc="If set to true, use cam_info_reader_node to pusblish CameraInfo."/>
+  <arg name="live" default="true" doc="live set to false means we don't run the actual camera (i.e. running from a log file" />
+
+  <group ns="$(arg veh)">
+    <node pkg="opencv_cpp_template" type="opencv_cpp_template_node" name="opencv_cpp_template_node" output="screen" clear_params="true" required="true">
+	<param name="~veh" value="$(arg veh)"/>
+    </node>
+  </group>
+</launch>

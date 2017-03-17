@@ -1,0 +1,84 @@
+## Each item has a tile-type and a cartesian location. For now,
+## the map cannot be edited except by editing this file, by hand, and
+## restarting the simcity module in order to send new messages.
+## 
+## When loaded with PyYAML, the format will give a list of dictionaries, one
+## for each tile:
+##     [{'tile_type': 'a', 'tile_center':[1,2]}, {} ...]
+
+# tile_type: name of the tile, as per tiles.yaml in the tiles folder
+# tile_center: the grid/cartesian coordinates of the center of the tile.
+
+
+
+
+
+- tile_type: nctu_c1_1
+  tile_center: [0, 60]
+
+- tile_type: nctu_c1_1
+  tile_center: [0, 60]
+
+- tile_type: nctu_c1_3
+  tile_center: [30, 60]
+
+- tile_type: nctu_c1_1
+  tile_center: [90, 60]
+
+- tile_type: nctu_c1_3
+  tile_center: [120, 60]
+            
+- tile_type: nctu_c1_4
+  tile_center: [60, 120]
+
+- tile_type: nctu_c1_4
+  tile_center: [60, 30]    
+
+- tile_type: nctu_c1_2
+  tile_center: [60, 0]    
+
+- tile_type: nctu_c1_2
+  tile_center: [60, 90]
+
+
+
+- tile_type: nctu_a1_1
+  tile_center: [0, 120]
+- tile_type: nctu_a1_2
+  tile_center: [0, 0]
+- tile_type: nctu_a1_3
+  tile_center: [120, 0]
+- tile_type: nctu_a1_4
+  tile_center: [120, 120]
+
+
+- tile_type: nctu_b1_1
+  tile_center: [30, 120]
+- tile_type: nctu_b1_2
+  tile_center: [0, 30]  
+- tile_type: nctu_b1_3
+  tile_center: [90, 0]
+- tile_type: nctu_b1_4
+  tile_center: [120, 90]
+
+- tile_type: nctu_e1_1
+  tile_center: [0, 90]             
+- tile_type: nctu_e1_2
+  tile_center: [30, 0]                         
+- tile_type: nctu_e1_3
+  tile_center: [120, 30]                           
+- tile_type: nctu_e1_4
+  tile_center: [90, 120]
+
+- tile_type: nctu_d1_1
+  tile_center: [30, 90]
+- tile_type: nctu_d1_2
+  tile_center: [30, 30]    
+- tile_type: nctu_d1_3
+  tile_center: [90, 30]
+- tile_type: nctu_d1_4
+  tile_center: [90, 90]
+                                                
+
+      #- tile_ttile_center#tile_center#tile_centerype:	
+#tile_center:

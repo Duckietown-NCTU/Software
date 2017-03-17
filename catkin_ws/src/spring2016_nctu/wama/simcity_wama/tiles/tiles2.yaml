@@ -1,0 +1,262 @@
+# bitmap = image of tile, for debugging or display
+# connectivity = array of arrays of length two 
+# nodes_positions = array of positions, in terms of fraction of length 
+constant_DEFAULT_NODES_POSITIONS: &DEFAULT_NODES_POSITIONS
+    #orientation z
+ 0: [0]
+ 1: [1,0,0]
+ 2: [0,1,0]    
+ 3: [0,-1,30]
+ 4: [1,0,0]
+ 5: [-1,0,30]
+ 6: [0,-1,30]
+ 7: [0,1,0]
+ 8: [-1,0,30]
+     #nctu_c1
+ 41: [1,0]
+ 42: [7,30]
+ 43: [28,26]
+ 44: [30,30]
+ 45: [28,0]
+ 46: [30,4]
+ 47: [28,11]
+ 48: [30,19]
+     #nctu_c3
+ 49: [23,0]
+ 50: [29,30]
+ 51: [0,0]
+ 52: [2,4]
+ 53: [0,11]
+ 54: [2,19]
+ 55: [0,26]
+ 56: [2,30]
+     #nctu_a1
+ 57: [1,0]
+ 58: [7,29]
+ 59: [1,29]
+ 60: [30,23]
+     #nctu_e1
+ 61: [1,0]
+ 62: [7,30]
+ 63: [28,0]
+ 64: [30,4]
+ 65: [28,11]
+ 66: [30,19]
+ 67: [28,26]
+ 68: [30,30]    
+     #nctu_b1
+ 69: [0,23]
+ 70: [30,29]
+ 71: [0,0]
+ 72: [4,2]
+ 73: [11,0]
+ 74: [19,2]
+ 75: [26,0]
+ 76: [30,2]
+     #nctu_d1
+ 79: [0,0]
+ 80: [2,4]
+ 81: [0,11]
+ 82: [2,19]
+ 83: [11,28]
+ 84: [19,30]
+ 85: [26,28]
+ 86: [30,30]
+
+     
+
+
+nctu_c1_1:
+    bitmap: "nctu_c1_1.png"
+    rec_white: [[41,42,1,2]]
+    rec_yellow: [[43,44,1,2],[45,46,1,2],[47,48,1,2]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS 
+nctu_c1_2:
+    bitmap: "nctu_c1_2.png"
+    rec_white: [[41,42,3,4]]
+    rec_yellow: [[43,44,3,4],[45,46,3,4],[47,48,3,4]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+nctu_c1_3:
+    bitmap: "nctu_c1_3.png"
+    rec_white: [[41,42,5,6]]
+    rec_yellow: [[43,44,5,6],[45,46,5,6],[47,48,5,6]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+nctu_c1_4:
+    bitmap: "nctu_c1_4.png"
+    rec_white: [[41,42,7,8]]
+    rec_yellow: [[43,44,7,8],[45,46,7,8],[47,48,7,8]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_a1_1:
+    bitmap: "nctu_a1_1.png"
+    rec_white: [[57,58,1,2],[59,60,1,2]]
+    rec_yellow: []
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_a1_2:  
+    bitmap: "nctu_a1_2.png"
+    rec_white: [[57,58,3,4],[59,60,3,4]]
+    rec_yellow: []
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_a1_3:
+    bitmap: "nctu_a1_3.png"
+    rec_white: [[57,58,5,6],[59,60,5,6]]
+    rec_yellow: []
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+    
+nctu_a1_4:
+    bitmap: "nctu_a1_4.png"
+    rec_white: [[57,58,7,8],[59,60,7,8]]
+    rec_yellow: []
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_e1_1:
+    bitmap: "nctu_e1_1.png"
+    rec_white: [[61,62,1,2]]
+    rec_yellow: [[63,64,1,2],[65,66,1,2],[67,68,1,2]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_e1_2:
+    bitmap: "nctu_e1_2.png"
+    rec_white: [[61,62,3,4]]
+    rec_yellow: [[63,64,3,4],[65,66,3,4],[67,68,3,4]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_e1_3:
+    bitmap: "nctu_e1_3.png"
+    rec_white: [[61,62,5,6]]
+    rec_yellow: [[63,64,5,6],[65,66,5,6],[67,68,5,6]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_e1_4:
+    bitmap: "nctu_e1_4.png"
+    rec_white: [[61,62,7,8]]
+    rec_yellow: [[63,64,7,8],[65,66,7,8],[67,68,7,8]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_b1_1:
+    bitmap: "nctu_b1_1.png"
+    rec_white: [[69,70,1,2]]
+    rec_yellow: [[71,72,1,2],[73,74,1,2],[75,76,1,2]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_b1_2:
+    bitmap: "nctu_b1_2.png"
+    rec_white: [[69,70,3,4]]
+    rec_yellow: [[71,72,3,4],[73,74,3,4],[75,76,3,4]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_b1_3:
+    bitmap: "nctu_b1_3.png"
+    rec_white: [[69,70,5,6]]
+    rec_yellow: [[71,72,5,6],[73,74,5,6],[75,76,5,6]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_b1_4:
+    bitmap: "nctu_b1_4.png"
+    rec_white: [[69,70,7,8]]
+    rec_yellow: [[71,72,7,8],[73,74,7,8],[75,76,7,8]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_d1_1:
+    bitmap: "nctu_d1_1.png"
+    rec_white: []
+    rec_yellow: [[79,80,1,2],[81,82,1,2],[83,84,1,2],[85,86,1,2]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_d1_2:
+    bitmap: "nctu_d1_2.png"
+    rec_white: []
+    rec_yellow: [[79,80,3,4],[81,82,3,4],[83,84,3,4],[85,86,3,4]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_d1_3:
+    bitmap: "nctu_d1_3.png"
+    rec_white: []
+    rec_yellow: [[79,80,5,6],[81,82,5,6],[83,84,5,6],[85,86,5,6]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+nctu_d1_4:
+    bitmap: "nctu_d1_4.png"
+    rec_white: []
+    rec_yellow: [[79,80,7,8],[81,82,7,8],[83,84,7,8],[85,86,7,8]]
+    nodes_positions: *DEFAULT_NODES_POSITIONS
+
+
+
+
+blank:
+  bitmap: "blank.png"
+  connectivity: []
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_east_west2:
+  bitmap: "road_east_west2.png" # TODO rmata: make the bitmap
+  connectivity: [[5,18], [21,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_north_south3:
+  bitmap: "road_north_south3.png"
+  connectivity: [[10,29]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_north_south2:
+  bitmap: "road_north_south2.png" # TODO rmata
+  connectivity: [[13,26],[29,10]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_south_east2:
+  bitmap: "road_south_east2.png" # TODO rmata
+  connectivity: [[13,18], [21, 10]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_west_south2:
+  bitmap: "road_west_south2.png" # TODO rmata
+  connectivity: [[5,10], [13,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_north_west2:
+  bitmap: "road_north_west2"
+  connectivity: [[5,26], [29,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_east_north2:
+  bitmap: "road_east_north2"
+  connectivity: [[21,26], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_4way_intersection2:
+  bitmap: "road_4way_intersection2"
+  connectivity: [[5,10], [5,18], [5,26], [13,2], [13,18], [13,26], [21,26], [21,2], [21,10], [29,2], [29,10], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_west_south_east2:
+  bitmap: "road_3way_intersection_west_south_east2"
+  connectivity: [[5,10], [5,18], [13,2], [13,18], [21,10], [21,2]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_north_south_east2:
+  bitmap: "road_3way_intersection_north_south_east2"
+  connectivity: [[13,18], [13,26], [21,10], [21,26], [29,10], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_north_west_south2:
+  bitmap: "road_3way_intersection_north_west_south2"
+  connectivity: [[5,10], [5,26], [13,2], [13,26], [29,2], [29,10]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+road_3way_intersection_north_west_east2:
+  bitmap: "road_3way_intersection_north_west_east2"
+  connectivity: [[5,18], [5,26], [21,2], [21,26], [29,2], [29,18]]
+  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+ 
+#highway_north_south:
+#  bitmap: "highway_north_south.png"
+#  connectivity: [[8,31],[9,30], [10,29],[10,29],[13,26], [13, 26], [14,25], [1#5,24]]
+#  nodes_positions: *DEFAULT_NODES_POSITIONS
+
+#indian_intersection:
+#  bitmap: “indian_intersection.png”
+#  connectivity: "todo (complete)"

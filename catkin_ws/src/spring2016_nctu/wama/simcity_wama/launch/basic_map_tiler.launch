@@ -1,0 +1,11 @@
+<launch>
+	<node name="basic_map_tiler" pkg="simcity_wama" type="basic_map_tiler.py" output="screen">
+		<!-- Setup parameters -->
+		<param name="~pub_timestep" value="0.5"/>
+		<!-- <param name="~map_file" value="/home/robotvision/duckietown/catkin_ws/src/simcity/maps/censi_map2.yaml"/> -->
+		<param name="~map_file" value="$(find simcity_wama)/maps/censi_map2.yaml"/>
+		<param name="~tiles_file" value="$(find simcity_wama)/tiles/tiles2.yaml"/>
+	</node>
+	<node pkg="rviz" name="rviz" type="rviz">
+	</node>
+</launch>

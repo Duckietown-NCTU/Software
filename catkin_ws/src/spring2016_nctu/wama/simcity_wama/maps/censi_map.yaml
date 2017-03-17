@@ -1,0 +1,117 @@
+## Each item has a tile-type and a cartesian location. For now,
+## the map cannot be edited except by editing this file, by hand, and
+## restarting the simcity module in order to send new messages.
+## 
+## When loaded with PyYAML, the format will give a list of dictionaries, one
+## for each tile:
+##     [{'tile_type': 'a', 'tile_center':[1,2]}, {} ...]
+
+# tile_type: name of the tile, as per tiles.yaml in the tiles folder
+# tile_center: the grid/cartesian coordinates of the center of the tile.
+
+- tile_type: blank #dummy tile...TODO fix bug where first tile doesn't display
+  tile_center: [0, 0]
+
+- tile_type: road_south_east2
+  tile_center: [-2.5, 3.5]
+
+- tile_type: road_3way_intersection_west_south_east2
+  tile_center: [-1.5, 3.5]
+
+- tile_type: road_west_south2
+  tile_center: [-0.5, 3.5]
+
+- tile_type: road_north_south2
+  tile_center: [-2.5, 2.5]
+
+- tile_type: road_north_south2
+  tile_center: [-1.5, 2.5]
+
+- tile_type: road_east_north2
+  tile_center: [-0.5, 2.5]
+
+- tile_type: road_east_west2
+  tile_center: [0.5, 2.5]
+
+- tile_type: road_west_south2
+  tile_center: [1.5, 2.5]
+
+#y = 1.5
+
+- tile_type: road_3way_intersection_north_south_east2
+  tile_center: [-2.5, 1.5]
+
+- tile_type: road_4way_intersection2
+  tile_center: [-1.5, 1.5]
+
+- tile_type: road_east_west2
+  tile_center: [-0.5, 1.5]
+- tile_type: road_3way_intersection_west_south_east2
+  tile_center: [0.5, 1.5]
+
+- tile_type: road_3way_intersection_north_west_south2
+  tile_center: [1.5, 1.5]
+
+
+#y = 0.5
+
+- tile_type: road_north_south2
+  tile_center: [-2.5, 0.5]
+
+- tile_type: road_3way_intersection_north_south_east2
+  tile_center: [-1.5, 0.5]
+
+- tile_type: road_east_west2
+  tile_center: [-0.5, 0.5]
+
+- tile_type: road_3way_intersection_north_west_south2
+  tile_center: [0.5, 0.5]
+
+- tile_type: road_north_south2
+  tile_center: [1.5, 0.5]
+
+# y = -0.5
+
+- tile_type: road_north_south2
+  tile_center: [-2.5, -0.5]
+
+- tile_type: road_north_south2
+  tile_center: [-1.5, -0.5]
+
+# nothing in x = -0.5
+
+- tile_type: road_north_south2
+  tile_center: [0.5, -0.5]
+
+- tile_type: road_north_south2
+  tile_center: [1.5, -0.5]
+
+# y = -1.5
+
+- tile_type: road_north_south2
+  tile_center: [-2.5, -1.5]
+
+- tile_type: road_3way_intersection_north_south_east2
+  tile_center: [-1.5, -1.5]
+
+- tile_type: road_east_west2
+  tile_center: [-0.5, -1.5]
+
+- tile_type: road_3way_intersection_north_west_east2
+  tile_center: [0.5, -1.5]
+
+- tile_type: road_north_west2
+  tile_center: [1.5, -1.5]
+
+# y = -2.5
+
+- tile_type: road_east_north2
+  tile_center: [-2.5, -2.5]
+
+- tile_type: road_north_west2
+  tile_center: [-1.5, -2.5]
+
+
+
+#- tile_type:	
+#  tile_center:

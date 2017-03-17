@@ -1,0 +1,20 @@
+<launch>
+	<arg name="veh" default="$(env VEHICLE_NAME)"/>
+	<!-- start basic args -->
+	<include file="$(find duckietown_buyme)/launch/FINAL_master.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="visualization" default="true" />
+		<arg name="verbose" default="true" />
+		<arg name="param_file_name" default="default" />
+		<arg name="car_cmd_switch_param_file_name" default="buyme" />
+		<arg name="fsm_file_name" default="buyme" />
+		<arg name="line_detector_param_file_name" default="universal" />
+		<arg name="anti_instagram" default="true" />
+		<arg name="/lane_following/stop_line_filter" default="true" /> 
+	
+		<!--test 2016/12/8 -->
+	        <arg name="yellow" default="true"/>
+
+<!-- will not every allow a transition into COORDINATION mode -->
+	</include>
+</launch>
