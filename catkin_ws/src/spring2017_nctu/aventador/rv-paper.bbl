@@ -1,0 +1,51 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{1467372}
+T.~Zhao, M.~Aggarwal, R.~Kumar, and H.~Sawhney, ``Real-time wide area
+  multi-camera stereo tracking,'' in \emph{2005 IEEE Computer Society
+  Conference on Computer Vision and Pattern Recognition (CVPR'05)}, vol.~1,
+  June 2005, pp. 976--983 vol. 1.
+
+\bibitem{Heng:2015:SVS:2825762.2825780}
+\BIBentryALTinterwordspacing
+L.~Heng, G.~H. Lee, and M.~Pollefeys, ``Self-calibration and visual slam with a
+  multi-camera system on a micro aerial vehicle,'' \emph{Auton. Robots},
+  vol.~39, no.~3, pp. 259--277, Oct. 2015. [Online]. Available:
+  \url{http://dx.doi.org/10.1007/s10514-015-9466-8}
+\BIBentrySTDinterwordspacing
+
+\bibitem{6696333}
+C.~Cai, E.~Dean-León, D.~Mendoza, N.~Somani, and A.~Knoll, ``Uncalibrated 3d
+  stereo image-based dynamic visual servoing for robot manipulators,'' in
+  \emph{2013 IEEE/RSJ International Conference on Intelligent Robots and
+  Systems}, Nov 2013, pp. 63--70.
+
+\bibitem{6907313}
+J.~Heller, D.~Henrion, and T.~Pajdla, ``Hand-eye and robot-world calibration by
+  global polynomial optimization,'' in \emph{2014 IEEE International Conference
+  on Robotics and Automation (ICRA)}, May 2014, pp. 3157--3164.
+
+\bibitem{gratal:irosws10}
+X.~Gratal, J.~Bohg, M.~Bj{\"o}rkman, and D.~Kragic, ``Scene representation and
+  object grasping using active vision,'' in \emph{IROS'10 Workshop on Defining
+  and Solving Realistic Perception Problems in Personal Robotics}, Oct. 2010.
+
+\end{thebibliography}
