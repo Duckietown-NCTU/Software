@@ -4,7 +4,8 @@
 	<arg name="veh" default="$(env VEHICLE_NAME)"/>
 	<arg name="config" default="baseline" />
 	<arg name="param_file_name" default="default" />
-	<arg name="fsm_file_name" default="yellow" />
+	<arg name="fsm_file_name" default="color_detector" />
+	<arg name="car_cmd_file_name" default="color_detector" />
 	<arg name="visualization" default="true" />
 	<arg name="verbose" default="true" />
 	<arg name="statistics" default="false"/>
@@ -47,7 +48,8 @@
 	<arg name="fsm" default="true"/>
 
 
-        <arg name="yellow" default="$(arg yellow)"/>
+    <arg name="yellow" default="$(arg yellow)"/>
+    <arg name="color_detector" default="true"/>
 
 	<!-- end switch args -->
 	
@@ -56,7 +58,7 @@
 
 	<!-- Start Camera -->  
 	<group if="$(arg camera)">
-		<include  file="$(find pi_camera)/launch/camera_node.launch">
+		<include  file="$(find pi_camera)/launch/camera_node_kuo.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="config" value="$(arg config)"/>
 			<arg name="param_file_name" value="$(arg param_file_name)"/>
@@ -168,7 +170,7 @@
 		<include file="$(find dagu_car)/launch/car_cmd_switch_node.launch">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="config" value="$(arg config)"/>
-			<arg name="param_file_name" value="$(arg param_file_name)"/>
+			<arg name="param_file_name" value="$(arg car_cmd_file_name)"/>
 		</include>
 
 		<include file="$(find fsm)/launch/logic_gate_node.launch">
@@ -179,6 +181,26 @@
 	</group>
 
 	<!--End FSM -->
+
+
+    <!-- Start color detector -->
+        <group if="$(arg color_detector)">
+        		<!-- color detector -->
+                <remap from="color_detector_node/image" to="camera_node/image/compressed"/>
+                <remap from="color_detector_node/transform" to="anti_instagram_node/transform"/>
+        		<include file="$(find duckietown_kaku)/launch/color_detector.launch">
+                        <arg name="veh" value="$(arg veh)"/>
+                </include>
+                <!-- Timer -->
+                <remap from="timer/in_lane" to="lane_filter_node/in_lane"/>
+                <include file="$(find duckietown_kaku)/launch/timer.launch">
+                        <arg name="veh" value="$(arg veh)"/>
+                </include>
+
+        </group>
+
+
+
 
 	<!-- Start Lane Following -->
 	<group if="$(arg lane_following)">
