@@ -28,7 +28,7 @@ class LineDetectorNode(object):
         self.bridge = CvBridge()
 
         self.active = True
-        self.car_cmd_switch = True
+        self.time_switch = True
 
         self.stats = Stats()
 
@@ -49,7 +49,9 @@ class LineDetectorNode(object):
    
         self.blue = 0
         self.yellow = 0
-         
+        self.count = 0
+        
+ 
         # Publishers
         self.pub_lines = rospy.Publisher("~segment_list", SegmentList, queue_size=1)
         self.pub_image = rospy.Publisher("~image_with_lines", Image, queue_size=1)
@@ -174,7 +176,7 @@ class LineDetectorNode(object):
 
         # set up parameter
 
-        hsv_blue1 = (100,80,90)
+        hsv_blue1 = (100,50,50)
         hsv_blue2 = (150,255,255)
         hsv_yellow1 = (25,50,50)
         hsv_yellow2 = (45,255,255)
@@ -368,19 +370,23 @@ class LineDetectorNode(object):
                 segment.normal.y = norm_y
                 segmentMsgList.append(segment)
 
-                if self.car_cmd_switch == True:
+                if self.time_switch == True:
                     msgg = BoolStamped()
                     msgg.data = True
                     self.pub_lane.publish(msgg)
-                    self.car_cmd_switch = False
+                    self.time_switch = False
+                    self.count = 0
 
             else:
-                
-                if self.car_cmd_switch == False:
-                    msgg = BoolStamped()
-                    msgg.data = False
-                    self.pub_lane.publish(msgg)
-                    self.car_cmd_switch = True
+                self.count += 1
+
+                if self.count >5:
+                    print "****************count = ",self.count," *******************"
+                    if self.time_switch == False:
+                        msgg = BoolStamped()
+                        msgg.data = False
+                        self.pub_lane.publish(msgg)
+                        self.time_switch = True
 
 
                 car_control_msg = Twist2DStamped()

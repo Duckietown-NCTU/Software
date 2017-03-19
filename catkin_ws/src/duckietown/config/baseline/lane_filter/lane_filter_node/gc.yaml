@@ -11,8 +11,8 @@ phi_min: -1.5
 phi_max: 1.5
 cov_v: 0.5
 linewidth_white: -0.01
-linewidth_yellow: 0.01
-lanewidth: 0.02
+linewidth_yellow: -0.01
+lanewidth: 0.1
 min_max: 0.1
 
 # minimum number of segments for generating measurement:
