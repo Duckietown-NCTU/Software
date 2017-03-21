@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [308.2276550720022, 0.0, 334.0116135829293, 0.0, 309.8277707683093, 253.5961631740034,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: aventador/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2858649681976522, 0.060422755851805156, -0.000694098016324896, 0.0013836418871798469,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [215.626220703125, 0.0, 335.0578836214845, 0.0, 0.0, 238.8638153076172, 261.54070753499946,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3
