@@ -1,0 +1,50 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{aleem2015comparative}
+S.~Aleem, L.~F. Capretz, and F.~Ahmed, ``Comparative performance analysis of
+  machine learning techniques for software bug detection,'' \emph{Computer
+  Science and Information Technology (CS \& IT-CSCP 2015)}, pp. 71--79, 2015.
+
+\bibitem{chang2015artificial}
+W.-L. Chang, D.~Zeng, R.-C. Chen, and S.~Guo, ``An artificial bee colony
+  algorithm for data collection path planning in sparse wireless sensor
+  networks,'' \emph{International Journal of Machine Learning and Cybernetics},
+  vol.~6, no.~3, pp. 375--383, 2015.
+
+\bibitem{giusti2016machine}
+A.~Giusti, J.~Guzzi, D.~C. Cire{\c{s}}an, F.-L. He, J.~P. Rodr{\'\i}guez,
+  F.~Fontana, M.~Faessler, C.~Forster, J.~Schmidhuber, G.~Di~Caro,
+  \emph{et~al.}, ``A machine learning approach to visual perception of forest
+  trails for mobile robots,'' \emph{IEEE Robotics and Automation Letters},
+  vol.~1, no.~2, pp. 661--667, 2016.
+
+\bibitem{jain2016beyond}
+A.~Jain, S.~Sharma, and A.~Saxena, ``Beyond geometric path planning: Learning
+  context-driven trajectory preferences via sub-optimal feedback,'' in
+  \emph{Robotics Research}.\hskip 1em plus 0.5em minus 0.4em\relax Springer,
+  2016, pp. 319--338.
+
+\bibitem{levine2016learning}
+S.~Levine, P.~Pastor, A.~Krizhevsky, and D.~Quillen, ``Learning hand-eye
+  coordination for robotic grasping with deep learning and large-scale data
+  collection,'' \emph{arXiv preprint arXiv:1603.02199}, 2016.
+
+\end{thebibliography}

@@ -1,0 +1,51 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{4287130}
+A.~P. Aguiar and J.~P. Hespanha, ``Trajectory-tracking and path-following of
+  underactuated autonomous vehicles with parametric modeling uncertainty,''
+  \emph{IEEE Transactions on Automatic Control}, vol.~52, no.~8, pp.
+  1362--1379, Aug 2007.
+
+\bibitem{853799}
+N.~Winters, J.~Gaspar, G.~Lacey, and J.~Santos-Victor, ``Omni-directional
+  vision for robot navigation,'' in \emph{Proceedings IEEE Workshop on
+  Omnidirectional Vision (Cat. No.PR00704)}, 2000, pp. 21--28.
+
+\bibitem{likhachev2009planning}
+M.~Likhachev and D.~Ferguson, ``Planning long dynamically feasible maneuvers
+  for autonomous vehicles,'' \emph{The International Journal of Robotics
+  Research}, vol.~28, no.~8, pp. 933--945, 2009.
+
+\bibitem{montemerlo2002conditional}
+M.~Montemerlo, S.~Thrun, and W.~Whittaker, ``Conditional particle filters for
+  simultaneous mobile robot localization and people-tracking,'' in
+  \emph{Robotics and Automation, 2002. Proceedings. ICRA'02. IEEE International
+  Conference on}, vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2002,
+  pp. 695--701.
+
+\bibitem{starner2000gesture}
+T.~Starner, J.~Auxier, D.~Ashbrook, and M.~Gandy, ``The gesture pendant: A
+  self-illuminating, wearable, infrared computer vision system for home
+  automation control and medical monitoring,'' in \emph{Wearable computers, the
+  fourth international symposium on}.\hskip 1em plus 0.5em minus 0.4em\relax
+  IEEE, 2000, pp. 87--94.
+
+\end{thebibliography}

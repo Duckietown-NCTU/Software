@@ -1,0 +1,49 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{1389727}
+N.~Koenig and A.~Howard, ``Design and use paradigms for gazebo, an open-source
+  multi-robot simulator,'' in \emph{2004 IEEE/RSJ International Conference on
+  Intelligent Robots and Systems (IROS) (IEEE Cat. No.04CH37566)}, vol.~3, Sept
+  2004, pp. 2149--2154 vol.3.
+
+\bibitem{4543489}
+J.~van~den Berg, M.~Lin, and D.~Manocha, ``Reciprocal velocity obstacles for
+  real-time multi-agent navigation,'' in \emph{2008 IEEE International
+  Conference on Robotics and Automation}, May 2008, pp. 1928--1935.
+
+\bibitem{5459469}
+K.~Jarrett, K.~Kavukcuoglu, M.~Ranzato, and Y.~LeCun, ``What is the best
+  multi-stage architecture for object recognition?'' in \emph{2009 IEEE 12th
+  International Conference on Computer Vision}, Sept 2009, pp. 2146--2153.
+
+\bibitem{5509725}
+E.~Marder-Eppstein, E.~Berger, T.~Foote, B.~Gerkey, and K.~Konolige, ``The
+  office marathon: Robust navigation in an indoor office environment,'' in
+  \emph{2010 IEEE International Conference on Robotics and Automation}, May
+  2010, pp. 300--307.
+
+\bibitem{990517}
+P.~Viola and M.~Jones, ``Rapid object detection using a boosted cascade of
+  simple features,'' in \emph{Proceedings of the 2001 IEEE Computer Society
+  Conference on Computer Vision and Pattern Recognition. CVPR 2001}, vol.~1,
+  2001, pp. I--511--I--518 vol.1.
+
+\end{thebibliography}
