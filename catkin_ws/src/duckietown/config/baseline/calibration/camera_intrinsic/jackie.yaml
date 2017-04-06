@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [326.9960467114861, 0.0, 304.82677433761074, 0.0, 329.69823305346046, 251.41312957746885,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: jackie/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2751568716303795, 0.050403141941634665, -0.0003219519815086382, 0.0021005033704630835,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [219.97552490234375, 0.0, 312.2595567230528, 0.0, 0.0, 266.1601867675781,
+    257.38361326906124, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3
