@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [318.7631124769893, 0.0, 326.3855396499191, 0.0, 338.798884347636, 245.3382368515843,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ghost/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.2603512025998361, 0.04783231593354211, -0.0064983636794657285, 0.0009859407701344443,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [216.20388793945312, 0.0, 325.3124679626526, 0.0, 0.0, 283.670166015625, 240.507373226661,
+    0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3
