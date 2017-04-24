@@ -10,6 +10,5 @@
 		<arg name="anti_instagram" default="true" />
 		<arg name="/lane_following/stop_line_filter" default="true" /> <!-- will not every allow a transition into COORDINATION mode -->
         <arg name="yellow" default="true" />
-        <arg name="gc" default="$(arg gc)"/>
 	</include>
 </launch>

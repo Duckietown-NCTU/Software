@@ -5,6 +5,9 @@
     <arg name="node_name" default="timer"/>
 
     <group ns="$(arg veh)">   
+    <remap from="timer/mode" to="fsm_node/mode"/>
+    <remap from="timer/in_lane" to="lane_filter_node/in_lane"/>
+    <remap from="timer/time_for_stop" to="stop_line_filter_node/time_for_stop"/>
 	<include if="$(arg switch)" file="$(find duckietown)/machines"/>     
 	<node if="$(arg switch)" machine="$(arg veh)" name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen" clear_params="true" required="true">
         </node>

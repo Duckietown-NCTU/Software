@@ -237,6 +237,20 @@ class LineDetectorNode(object):
         
         if len(lines_yellow) > 0:
             segmentList.segments.extend(self.toSegmentMsg(lines_yellow, normals_yellow, Segment.YELLOW))
+        if len(segmentList.segments) == 0:
+
+                    if self.time_switch == False:
+                        msgg = BoolStamped()
+                        msgg.data = False
+                        self.pub_lane.publish(msgg)
+                        self.time_switch = True
+
+
+                    car_control_msg = Twist2DStamped()
+                    car_control_msg.v = 0.0
+                    car_control_msg.omega = 0.0
+                    self.pub_car_cmd.publish(car_control_msg)
+                
 
         #if len(lines_blue) > 0:
             #segmentList.segments.extend(self.toSegmentMsg(lines_blue, normals_blue, Segment.YELLOW))
@@ -377,23 +391,7 @@ class LineDetectorNode(object):
                     self.time_switch = False
                     self.count = 0
 
-            else:
-                self.count += 1
-
-                if self.count >5:
-                    print "****************count = ",self.count," *******************"
-                    if self.time_switch == False:
-                        msgg = BoolStamped()
-                        msgg.data = False
-                        self.pub_lane.publish(msgg)
-                        self.time_switch = True
-
-
-                car_control_msg = Twist2DStamped()
-                car_control_msg.v = 0.0
-                car_control_msg.omega = 0.0
-                self.pub_car_cmd.publish(car_control_msg)
-                
+            
 
         return segmentMsgList
 
