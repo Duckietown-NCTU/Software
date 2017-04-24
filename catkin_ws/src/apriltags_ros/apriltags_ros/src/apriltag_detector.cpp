@@ -14,6 +14,7 @@
 #include <AprilTags/Tag36h9.h>
 #include <AprilTags/Tag36h11.h>
 #include <XmlRpcException.h>
+#include <time.h>
 
 namespace apriltags_ros{
 
@@ -160,6 +161,10 @@ namespace apriltags_ros{
   }
 
   void AprilTagDetector::image_compress_Cb(const sensor_msgs::CompressedImageConstPtr& msg){
+    // measure process time
+    cout << "start" << endl;
+    const clock_t begin_time = clock();
+    //
     if(on_switch == false){
       return;
     }
@@ -231,8 +236,8 @@ namespace apriltags_ros{
       tf_pub_.sendTransform(tf::StampedTransform(tag_transform, tag_transform.stamp_, tag_transform.frame_id_, description.frame_name()));
     }
 
-  cv::Rect crop_proposal;
-  cv_crop = cv_ptr;
+    cv::Rect crop_proposal;
+    cv_crop = cv_ptr;
     for(int qi = 0; qi < quad_proposals.size(); qi++){
       duckietown_msgs::Rect quad_proposal;
       quad_proposal.x = quad_proposals[qi].x;
@@ -262,8 +267,12 @@ namespace apriltags_ros{
     detections_pub_.publish(tag_detection_array);
     proposals_pub_.publish(quad_proposal_array);
     pose_pub_.publish(tag_pose_array);
-  image_pub_.publish(cv_crop->toImageMsg());
+    image_pub_.publish(cv_crop->toImageMsg());
     //image_pub_.publish(cv_ptr->toImageMsg());
+    // measure process time
+    cout << "end" << endl;
+    cout << "processtime : "<< float( clock () - begin_time ) << endl;
+    //
   }
 
 

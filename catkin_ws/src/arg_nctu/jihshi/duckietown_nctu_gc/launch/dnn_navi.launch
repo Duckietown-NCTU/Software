@@ -1,0 +1,29 @@
+<launch>
+	<arg name="veh" doc="Name of vehicle. ex: megaman"/>
+	<arg name="local" default="false" doc="true for running everything you possibly can on laptop. false for everything running on vehicle."/>
+	<arg name="config" default="baseline" doc="Specify a config."/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman." />
+	<arg name="raw" default="false" doc="If set to true, also publish raw image using decoder."/> 
+	<arg name="cam_info" default="true" doc="If set to true, use cam_info_reader_node to pusblish CameraInfo."/>
+	<arg name="live" default="true" doc="live set to false means we don't run the actual camera (i.e. running from a log file" />
+	<arg name="joy_mapper_param_file_name" default="$(arg param_file_name)" doc="Specify a joy_mapper param file. ex:high_speed" />
+
+
+    <include file="$(find duckietown)/machines"/>
+
+	<!-- car_cmd_switch_node -->
+	<remap from="inverse_kinematics_node/car_cmd" to="gd_L2R_text_carcmd_node/pub_carcmd"/>
+	<include file="$(find dagu_car)/launch/inverse_kinematics_node.launch">
+		<arg name="veh" value="$(arg veh)"/>
+		<arg name="local" value="$(arg local)"/>
+		<arg name="config" value="$(arg config)"/>
+	</include>
+
+	<!-- Wheel Driver -->
+	<remap from="wheels_driver_node/wheels_cmd" to="inverse_kinematics_node/wheels_cmd"/>
+	<include if="$(arg live)" file="$(find dagu_car)/launch/wheels_driver_node.launch">
+		<arg name="veh" value="$(arg veh)"/>
+	</include>
+
+
+</launch>

@@ -251,7 +251,7 @@ redbull:
 jack:
   name: Jack 
 
-karissa:
+gc:
   name: JihShi Chen     
 
 topbot:
@@ -271,3 +271,24 @@ buyme:
 
 hercules:
   name: hercules
+
+gcdog:
+  name: GC
+
+sb1:
+  name: spiderbot1
+
+sb2:
+  name: spiderbot2
+
+sb3:
+  name: spiderbot3
+
+sb4:
+  name: spiderbot4
+
+sb5:
+  name: spiderbot5
+
+sb6:
+  name: spiderbot6
