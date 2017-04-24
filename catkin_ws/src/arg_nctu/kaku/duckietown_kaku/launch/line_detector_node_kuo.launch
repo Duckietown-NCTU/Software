@@ -20,7 +20,7 @@
 
         <!-- switch -->
         <include unless="$(arg local)" file="$(find duckietown)/machines"/>
-        <node if="$(arg gc)" machine="$(arg veh)" name="line_detector_node" pkg="duckietown_kaku" type="line_detector_node_gc.py" output="screen" clear_params="true" required="true">
+        <node if="$(arg gc)" machine="$(arg veh)" name="line_detector_node" pkg="duckietown_kaku" type="line_detector_node_yellow_blue.py" output="screen" clear_params="true" required="true">
             <rosparam command="load" file="$(find duckietown)/config/$(arg config)/line_detector/$(arg node_name)/$(arg param_file_name).yaml"/>
             <param name="verbose" value="$(arg verbose)"/>
         </node>

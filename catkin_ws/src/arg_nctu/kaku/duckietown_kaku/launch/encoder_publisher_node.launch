@@ -1,0 +1,27 @@
+<launch>
+	<arg name="veh"/>
+	<arg name="local" default="false" doc="true to launch locally on laptop. false to launch of vehicle"/>
+	<arg name="pkg_name" default="duckietown_kaku" doc="name of the package"/>
+	<arg name="node_name" default="encoder_publish" doc="name of the node"/>
+	<arg name="scale" default="1" doc="pose scale"/>
+	<arg name="shift_x" default="0" doc="pose initial x"/>
+	<arg name="shift_y" default="0" doc="pose initial y"/>
+
+	<group ns="$(arg veh)">
+	<!-- Local -->
+		<node if="$(arg local)" pkg="$(arg pkg_name)" type="$(arg node_name).py" name="$(arg node_name)" output="screen" clear_params="true" required="true">
+		<param name="tango" type="string" value="$(arg tango)"/>
+		<param name="scale" type="double" value="$(arg scale)"/>
+		<param name="shift_x" type="double" value="$(arg shift_x)"/>
+		<param name="shift_y" type="double" value="$(arg shift_y)"/>
+		</node>
+	<!-- Remote -->
+		<include unless="$(arg local)" file="$(find duckietown)/machines"/>
+		<node unless="$(arg local)" machine="$(arg veh)" pkg="$(arg pkg_name)" type="$(arg node_name).py" name="$(arg node_name)" output="screen" clear_params="true" required="true">
+		<param name="tango" type="string" value="$(arg tango)"/>
+		<param name="scale" type="double" value="$(arg scale)"/>
+		<param name="shift_x" type="double" value="$(arg shift_x)"/>
+		<param name="shift_y" type="double" value="$(arg shift_y)"/>		
+		</node>
+	</group>
+</launch>

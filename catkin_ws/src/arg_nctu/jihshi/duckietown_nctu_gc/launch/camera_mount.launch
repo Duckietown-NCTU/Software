@@ -1,8 +1,8 @@
 <launch>
     <arg name="veh" doc="Name of vehicle. ex: megaman"/>
     <arg name="switch" default="true"/>
-    <arg name="pkg_name" value="duckietown_kaku"/>
-    <arg name="node_name" default="grab"/>
+    <arg name="pkg_name" value="duckietown_nctu_gc"/>
+    <arg name="node_name" default="camera_mount"/>
 
     <group ns="$(arg veh)">   
 	<include if="$(arg switch)" file="$(find duckietown)/machines"/>     
