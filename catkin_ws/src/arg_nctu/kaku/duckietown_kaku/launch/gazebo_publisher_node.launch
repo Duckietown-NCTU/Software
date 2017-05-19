@@ -2,7 +2,7 @@
 	<arg name="veh"/>
 	<arg name="local" default="false" doc="true to launch locally on laptop. false to launch of vehicle"/>
 	<arg name="pkg_name" default="duckietown_kaku" doc="name of the package"/>
-	<arg name="node_name" default="encoder_publish" doc="name of the node"/>
+	<arg name="node_name" default="gazebo_cmd_vel" doc="name of the node"/>
 	<arg name="scale" default="1" doc="pose scale"/>
 	<arg name="shift_x" default="0" doc="pose initial x"/>
 	<arg name="shift_y" default="0" doc="pose initial y"/>

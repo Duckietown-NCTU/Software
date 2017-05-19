@@ -273,7 +273,13 @@ hercules:
   name: hercules
 
 gcdog:
-  name: GC
+  name: PKG
+
+gcleft:
+  name: PKG
+
+gcright:
+  name: PKG
 
 sb1:
   name: spiderbot1

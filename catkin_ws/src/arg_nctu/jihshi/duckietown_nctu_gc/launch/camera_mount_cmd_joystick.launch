@@ -25,7 +25,7 @@
     </include>
 
     <!-- camera -->
-    <include file="$(find duckietown)/launch/camera.launch">
+    <include file="$(find duckietown_nctu_gc)/launch/camera_gc.launch">
 	<arg name="veh" value="$(arg veh)"/>
 	<arg name="local" value="$(arg local)"/>
 	<arg name="config" value="$(arg config)"/>
