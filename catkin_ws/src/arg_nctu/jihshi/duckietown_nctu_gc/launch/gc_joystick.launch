@@ -15,15 +15,6 @@
         <rosparam command="load" file="$(find duckietown)/config/$(arg config)/joy/joy_node/$(arg param_file_name).yaml"/>
     </node>
 
-
-    <!-- grab -->
-     <include file="$(find duckietown_kaku)/launch/grab.launch">
-        <arg name="veh" value="$(arg veh)"/>
-    </include>
-
-
-
-
     <!-- joy_mapper -->
     <include file="$(find joy_mapper)/launch/joy_mapper_node.launch">
         <arg name="veh" value="$(arg veh)"/>
@@ -36,6 +27,22 @@
     <remap from="inverse_kinematics_node/car_cmd" to="joy_mapper_node/car_cmd"/>
     <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />
     <include file="$(find dagu_car)/launch/inverse_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+    </include>
+
+    <!-- run forward_kinematics_node -->
+    <remap from="forward_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
+    <include file="$(find dagu_car)/launch/forward_kinematics_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+        <arg name="local" value="$(arg local)"/>
+        <arg name="config" value="$(arg config)"/>
+    </include>
+
+    <!-- run the velocity_to_pose_node -->
+    <remap from="velocity_to_pose_node/velocity" to="forward_kinematics_node/velocity" />
+    <include file="$(find dagu_car)/launch/velocity_to_pose_node.launch">
         <arg name="veh" value="$(arg veh)"/>
         <arg name="local" value="$(arg local)"/>
         <arg name="config" value="$(arg config)"/>
