@@ -81,7 +81,7 @@ class JoyMapper(object):
 # Button List index of joy.buttons array:
 # a = 0, b=1, x=2. y=3, lb=4, rb=5, back = 6, start =7,
 # logitek = 8, left joy = 9, right joy = 10
-
+'''
     def processButtons(self, joy_msg):
         if (joy_msg.buttons[6] == 1): #The back button
             override_msg = BoolStamped()
@@ -126,7 +126,52 @@ class JoyMapper(object):
             some_active = sum(joy_msg.buttons) > 0
             if some_active:
                 rospy.loginfo('No binding for joy_msg.buttons = %s' % str(joy_msg.buttons))
-                                          
+'''                                        
+ def processButtons(self, joy_msg):
+        if (joy_msg.buttons[0] == 1): #The a button
+            override_msg = BoolStamped()
+            override_msg.header.stamp = self.joy.header.stamp
+            override_msg.data = True
+            self.pub_joy_override.publish(override_msg)
+        elif (joy_msg.buttons[1] == 1): #the b button
+            override_msg = BoolStamped()
+            override_msg.header.stamp = self.joy.header.stamp
+            override_msg.data = False
+            self.pub_joy_override.publish(override_msg)
+        elif (joy_msg.buttons[5] == 1): # Right back button
+            self.state_verbose ^= True
+            rospy.loginfo('state_verbose = %s' % self.state_verbose)
+            rospy.set_param('line_detector_node/verbose', self.state_verbose) # bad - should be published for all to hear - not set a specific param
+
+        elif (joy_msg.buttons[4] == 1): #Left back button
+            self.state_parallel_autonomy ^= True
+            rospy.loginfo('state_parallel_autonomy = %s' % self.state_parallel_autonomy)
+            parallel_autonomy_msg = BoolStamped()
+            parallel_autonomy_msg.header.stamp = self.joy.header.stamp
+            parallel_autonomy_msg.data = self.state_parallel_autonomy
+            self.pub_parallel_autonomy.publish(parallel_autonomy_msg)
+        elif (joy_msg.buttons[3] == 1):
+            anti_instagram_msg = BoolStamped()
+            anti_instagram_msg.header.stamp = self.joy.header.stamp
+            anti_instagram_msg.data = True
+            self.pub_anti_instagram.publish(anti_instagram_msg)
+        elif (joy_msg.buttons[2] == 1): #x button 
+            e_stop_msg = BoolStamped()
+            e_stop_msg.header.stamp = self.joy.header.stamp
+            e_stop_msg.data = True # note that this is toggle (actual value doesn't matter)
+            self.pub_e_stop.publish(e_stop_msg)
+        elif (joy_msg.buttons[9] == 1): #push left joystick button 
+            avoidance_msg = BoolStamped()
+            rospy.loginfo('start lane following with avoidance mode')
+            avoidance_msg.header.stamp = self.joy.header.stamp
+            avoidance_msg.data = True 
+            self.pub_avoidance.publish(avoidance_msg)
+
+        else:
+            some_active = sum(joy_msg.buttons) > 0
+            if some_active:
+                rospy.loginfo('No binding for joy_msg.buttons = %s' % str(joy_msg.buttons))
+
 
 if __name__ == "__main__":
     rospy.init_node("joy_mapper",anonymous=False)
