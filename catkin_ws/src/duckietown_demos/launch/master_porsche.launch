@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+	<!-- start basic args -->
+	<arg name="veh" default="$(env VEHICLE_NAME)"/>
+	<arg name="config" default="baseline" />
+	<arg name="param_file_name" default="default" />
+	<arg name="apriltags_param_file_name" default="$(arg param_file_name)" />
+	<arg name="fsm_file_name" default="default" />
+	<arg name="visualization" default="true" />
+	<arg name="verbose" default="false" />
+	<arg name="statistics" default="false"/>
+	<arg name="map_name" default="duckietown_map"/>
+	<arg name="anti_instagram" default="true"/>
+	<arg name="loc" default="-1"/>
+	<arg name="line_detector_param_file_name" default="$(arg param_file_name)"/>
+	<arg name="intersectionType" />
+	<!-- end basic args -->
+ 
+<!-- the things that are "on" by default: 
+ - camera stack (raw imagery defaults to false)
+ - wheels stack
+ - joystick stack
+ - lane_following stack (old version of line detector only)
+ - fsm
+-->
+
+<!-- general convention on remappings is that we remap the "subscribers" -->
+
+	<!-- start switch args -->
+	<arg name="camera" default="true"/>
+	<arg name="/camera/raw" default="false"/>
+	<arg name="/camera/cam_info" default="true"/>
+	<arg name="/camera/raw/rect" default="false"/>
+	<arg name="/camera/local" default="false" />
+
+	<arg name="wheels" default="true"/>
+
+	<arg name="joystick" default="true"/>
+
+	<arg name="odometry" default="false"/>
+	<arg name="/odometry/forward_kinematics" default="false"/>
+
+	<arg name="lane_following" default="true"/>
+	<arg name="/lane_following/line_detection" default="true"/>
+	<arg name="/lane_following/ground_projection" default="true"/>
+	<arg name="/lane_following/lane_filter" default="true"/>
+	<arg name="/lane_following/stop_line_filter" default="true"/>
+	<arg name="/lane_following/lane_controller" default="true"/>
+
+	<arg name="fsm" default="true"/>
+
+	<arg name="obstacle_avoidance" default="false"/>
+	<arg name="/obstacle_avoidance/simple_stop" default="true"/>
+	<arg name="/obstacle_avoidance/detection" default="true"/>
+	<arg name="/obstacle_avoidance/safety" default="true"/>
+
+	<arg name="vehicle_avoidance" default="false"/>
+	<arg name="/vehicle_avoidance/detection" default="true" />
+	<arg name="/vehicle_avoidance/control" default="true"/>
+
+	<arg name="apriltags" default="false"/>
+	<arg name="/apriltags/local" default="false" />
+
+
+	<arg name="LED" default="true" />
+	<arg name="/LED/pattern_switch" default="false" />
+	<arg name="/LED/detector" default="false" />
+	<arg name="/LED/joystick" default="false" />
+	<arg name="/LED/emitter"  default="true" />
+	<arg name="/LED/interpreter" default="false" />
+
+	<arg name="odometry_learning" default="false"/>
+	<arg name="/odometry_learning/kinematics" default="true"/>
+	<arg name="/odometry_learning/learning"  default="false"/>
+	<arg name="/odometry_learning/visual_odometry" default="false"/>
+
+	<arg name="coordination" default="false"/>
+
+	<arg name="navigation" default="false"/>
+	<arg name="/navigation/intersection_control" default="true"/>
+	<arg name="/navigation/apriltags_random" default="true"/>
+	<arg name="/navigation/random_sr_turns" default="false"/>
+	<arg name="/navigation/graph_planner" default="false"/>
+	<!-- NOTE: either apriltags_random or graph_planner but not both -->
+
+	<arg name="parallel_autonomy" default="false"/>
+
+	<arg name="global_localizer" default="false"/>
+
+	<arg name="SLAM" default="false"/>
+
+	<arg name="localization" default="false"/>
+	<arg name="/localization/local" default="false" />
+	<arg name="/localization/map_name" default="open_house_dp6" />
+	<arg name="/localization/gui" default="false"/>
+
+	<!-- end switch args -->
+	
+	<!-- Enable statistics -->
+	<param name="enable_statistics" value="$(arg statistics)"/>
+
+	<!-- Start Camera -->  
+	<group if="$(arg camera)">
+		<include  file="$(find pi_camera)/launch/camera_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+
+		<!-- cam_info_reader_node -->
+		<group if="$(arg /camera/cam_info)">
+			<remap from="cam_info_reader_node/camera_info" to="camera_node/camera_info"/>
+			<remap from="cam_info_reader_node/compressed_image" to="camera_node/image/compressed"/>
+			<include file="$(find pi_camera)/launch/cam_info_reader_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+
+
+		<group if="$(arg /camera/raw)">
+
+			<!-- decoder_node -->
+			<remap from="decoder_node/compressed_image" to="camera_node/image/compressed"/>
+			<remap from="decoder_node/image/raw" to="camera_node/image/raw"/>
+			<include file="$(find pi_camera)/launch/decoder_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="local" value="$(arg /camera/local)" />
+			</include>
+
+			<!-- Raw camera_info_reader node -->
+			<remap from="raw_cam_info_reader_node/camera_info" to="camera_node/raw_camera_info"/>
+			<remap from="raw_cam_info_reader_node/compressed_image" to="camera_node/image/raw"/>
+			<include file="$(find pi_camera)/launch/cam_info_reader_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="local" value="$(arg /camera/local)" />
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+                <arg name="cali_file_name" value="$(arg veh)_rect" />
+				<arg name="node_name" value="raw_cam_info_reader_node" />
+				<arg name="image_type" value="raw" />
+			</include>
+
+			<group if="$(arg /camera/raw/rect)">
+				<!-- Rectification -->
+				<remap from="image_raw" to="camera_node/image/raw"/>
+				<remap from="camera_info" to="camera_node/raw_camera_info"/>
+				<remap from="image_rect_color" to="camera_node/image/rect" />
+				<include file="$(find pi_camera)/launch/image_proc_node.launch">
+					<arg name="veh" value="$(arg veh)"/>
+					<arg name="local" value="$(arg /camera/local)" />
+				</include>
+			</group>
+		</group>
+	</group>
+	<!-- End Camera -->
+
+	<!-- Start Wheels -->
+	<group if="$(arg wheels)">
+
+	    <remap from="inverse_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd" />
+		<remap from="inverse_kinematics_node/car_cmd" to="car_cmd_switch_node/cmd"/>
+		<include file="$(find dagu_car)/launch/inverse_kinematics_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+		</include>
+
+		<!-- Wheel Driver -->
+		<include file="$(find dagu_car)/launch/wheels_driver_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+		</include>
+
+	 
+	</group>
+
+	<!-- End Wheels -->
+
+	<group if="$(arg odometry)">
+		<group if="$(arg /odometry/forward_kinematics)">
+				<remap from="forward_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
+				<include file="$(find dagu_car)/launch/forward_kinematics_node.launch">
+					<arg name="veh" value="$(arg veh)"/>
+					<arg name="config" value="$(arg config)"/>
+				</include>
+				<!-- run the velocity_to_pose_node -->
+				<remap from="velocity_to_pose_node/velocity" to="forward_kinematics_node/velocity" />
+				<include file="$(find dagu_car)/launch/velocity_to_pose_node.launch">
+					<arg name="veh" value="$(arg veh)"/>
+					<arg name="config" value="$(arg config)"/>
+				</include>
+		</group>
+	</group>
+
+
+	<!-- Start Joystick -->
+	<group if="$(arg joystick)">
+		<!-- joy -->
+		<include file="$(find joy_mapper)/launch/joy_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+
+		<!-- joy_mapper -->
+		<include file="$(find joy_mapper)/launch/joy_mapper_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+	</group>
+	<!-- End Joystick -->
+
+	<!-- Start FSM -->
+	<group if="$(arg fsm)">
+		<!-- FSM -->
+		<!-- no remapping for FSM - full topic names specified in params yaml -->
+		<include file="$(find fsm)/launch/fsm_node.launch">
+			<arg name="veh" value="$(arg veh)"/>        
+			<arg name="config" value="$(arg config)"/>        
+			<arg name="param_file_name" value="$(arg fsm_file_name)"/>        
+		</include>
+
+		<!-- car_cmd_switch_node -->
+		<!-- no remappings for car_cmd_switch - full topic names specified in params yaml -->
+		<remap from="car_cmd_switch_node/cmd_lane_following" to="lane_controller_node/lane_control"/> <!-- need either lots more of these or none of these -->
+		<include file="$(find dagu_car)/launch/car_cmd_switch_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+
+		<include file="$(find fsm)/launch/logic_gate_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+	</group>
+
+	<!--End FSM -->
+
+	<!-- Start Lane Following -->
+	<group if="$(arg lane_following)">
+
+		<!-- Line Detector -->
+		<group if="$(arg /lane_following/line_detection)">
+			<remap from="line_detector_node/image" to="camera_node/image/compressed"/>
+			<remap from="line_detector_node/transform" to="anti_instagram_node/transform"/>
+			<include file="$(find line_detector)/launch/line_detector_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<!-- NOTE: "line_detector_param_file_name" as special case -->
+				<arg name="param_file_name" value="$(arg line_detector_param_file_name)"/>
+				<arg name="verbose" value="$(arg verbose)" />
+			</include>	
+		</group>
+		
+		<!-- Ground projection -->
+		<group if="$(arg /lane_following/ground_projection)">
+			<include file="$(find ground_projection)/launch/ground_projection.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+			<group if="$(arg visualization)">
+			  <remap from="duckiebot_visualizer/segment_list" to="ground_projection/lineseglist_out"/>
+			  <include file="$(find duckiebot_visualizer)/launch/duckiebot_visualizer.launch">
+			    <arg name="veh" value="$(arg veh)" />
+			  </include>
+			</group>
+		</group>
+	
+		<!-- Lane Filter -->
+		<group if="$(arg /lane_following/lane_filter)">
+			<remap from="lane_filter_node/segment_list" to="ground_projection/lineseglist_out"/>
+			<include file="$(find lane_filter)/launch/lane_filter_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+
+		<!-- Stop Line Filter -->
+		<group if="$(arg /lane_following/stop_line_filter)">      
+			<remap from="stop_line_filter_node/lanewidth" to="lane_filter_node/lanewidth"/>
+			<remap from="stop_line_filter_node/lane_pose" to="lane_filter_node/lane_pose"/>
+			<remap from="stop_line_filter_node/segment_list" to="ground_projection/lineseglist_out"/>
+			<include file="$(find stop_line_filter)/launch/stop_line_filter_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+
+		<!-- Lane controller -->
+		<group if="$(arg /lane_following/lane_controller)">
+			<remap from="lane_controller_node/lane_pose" to="lane_filter_node/lane_pose"/>
+			<include file="$(find lane_control)/launch/lane_controller_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+			</include>
+		</group>
+
+		<!-- Visualization -->
+		<group if="$(arg visualization)">
+			<include file="$(find lane_filter)/launch/lane_pose_visualizer_node.launch">
+				<arg name="veh" value="$(arg veh)"/>		
+			</include>
+		</group>
+
+	</group>
+	<!-- End Lane Control -->
+
+	<!-- Start Obstacle Avoidance -->
+	<group if="$(arg obstacle_avoidance)">
+		
+		<!-- Object Detection -->
+		<group if="$(arg /obstacle_avoidance/detection)">
+			<remap from="static_object_detector_node/image_raw" to="camera_node/image/raw"/>
+			<include file="$(find mdoap)/launch/static_object_detector_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+
+		<!-- Object Safety -->
+		<group if="$(arg /obstacle_avoidance/safety)">
+			<remap from="obstacle_safety_node/detection_list" to="static_object_detector_node/detection_list"/>
+			<include file="$(find mdoap)/launch/obstacle_safety_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+
+		<!-- Simple Stop Controller -->
+		<group if="$(arg /obstacle_avoidance/simple_stop)">
+			<remap from="simple_stop_controller_node/too_close" to="obstacle_safety_node/object_too_close"/>
+			<include file="$(find mdoap)/launch/simple_stop_controller_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+	</group> 
+
+	<!-- Start Vehicle Avoidance -->
+	<group if="$(arg vehicle_avoidance)">
+
+		<!-- Vehicle Detection Node -->
+		<remap from="vehicle_detection_node/image" to="camera_node/image/raw" />
+		<group if="$(arg /vehicle_avoidance/detection)">
+			<include file="$(find vehicle_detection)/launch/vehicle_detection_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+			</include>
+		</group>
+		<!-- Vehicle Control Node -->
+		<group if="$(arg /vehicle_avoidance/control)">
+			<remap from="vehicle_avoidance_control_node/detection" to="vehicle_detection_node/detection"/>
+			<include file="$(find vehicle_detection)/launch/vehicle_avoidance_control_node.launch" >
+				<arg name="veh" value="$(arg veh)"/>
+			</include>
+		</group>
+	</group>
+	<!-- End Vehicle Avoidance -->
+	
+	<!-- Start April Tags -->
+	<group if="$(arg apriltags)">
+		<!-- AprilTags Detections -->
+		<remap from="image_rect" to="camera_node/image/rect" />
+		<remap from="camera_node/image/camera_info" to="camera_node/raw_camera_info" />
+		<remap from="apriltags_detector_node/image_raw" to="camera_node/image/rect"/>
+		<remap from="apriltags_detector_node/camera_info" to="camera_node/raw_camera_info"/>
+		<include file="$(find apriltags_ros)/launch/apriltag_detector_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="local" value="$(arg /apriltags/local)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+		<!-- Postprocessing node -->
+		<remap from="apriltags_postprocessing_node/apriltags_in" to="tag_detections" />
+		<include file="$(find apriltags_ros)/launch/apriltags_postprocessing_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="local" value="$(arg /apriltags/local)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+	</group>
+	<!--End Apriltags -->
+
+	<!-- Start LEDs Detection -->
+	<group if="$(arg LED)">
+		
+
+		<!-- Detection -->
+		<group if="$(arg /LED/detector)">
+			<include file="$(find led_detection)/launch/LED_detection.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+
+        <!--remap from="led_joy_mapper_node/change_color_pattern" to="led_emitter_node/change_color_pattern" /-->
+		<group if="$(arg /LED/joystick)">
+			<include file="$(find led_joy_mapper)/launch/led_joy_mapper_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+		
+		<remap from="led_pattern_switch_node/change_color_pattern" to="led_emitter_node/change_color_pattern" />    
+		<group if="$(arg /LED/pattern_switch)">
+			<include file="$(find led_emitter)/launch/led_pattern_switch_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>    
+		</group>
+        
+		<group if="$(arg /LED/emitter)">
+			<include file="$(find led_emitter)/launch/led_emitter_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+
+			</include>
+		</group>
+
+		<!-- TODO do we need some remappings here? -->
+		<remap from="LED_interpreter_node/raw_led_detection" to="LED_detector_node/raw_led_detection" />
+		<group if="$(arg /LED/interpreter)">
+			<include file="$(find led_interpreter)/launch/LED_interpreter.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+				<arg name="intersectionType" value="$(arg intersectionType)" />
+			</include>
+		</group>
+		
+		<!-- Not launching visualization because it will crash on robot. Can be manually launched from laptop except that things weren't done right in the elemental launch files. Shoule be fixed -->
+	</group>
+
+	<!-- End LEDs Detection -->
+
+	<!-- Start Odometry Learning -->
+	<group if="$(arg odometry_learning)">
+		<group if="$(arg /odometry_learning/kinematics)">
+			<!-- run forward_kinematics_node -->
+			<remap from="forward_kinematics_node/wheels_cmd" to="wheels_driver_node/wheels_cmd_executed" />
+			<remap from="forward_kinematics_node/theta_dot_weights" to="kinematics_learning_node/theta_dot_kinematics_weights" />
+			<remap from="forward_kinematics_node/v_weights" to="kinematics_learning_node/v_kinematics_weights" />
+			<include file="$(find kinematics)/launch/forward_kinematics_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+	 
+
+		<group if="$(arg /odometry_learning/learning)">
+			<!-- run the kinematics_learner_node -->
+			<remap from="kinematics_learning_node/v_sample" to="$(arg learning_sensor_node)/v_sample" />
+			<remap from="kinematics_learning_node/theta_dot_sample" to="$(arg learning_sensor_node)/theta_dot_sample" />
+			<include file="$(find kinematics)/launch/kinematics_learning_node.launch">
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>
+				<arg name="param_file_name" value="$(arg param_file_name)"/>
+			</include>
+		</group>
+
+		<group if="$(arg /odometry_learning/visual_odometry)">
+			<!-- not sure what's supposed to go in here. Is it hte position_filter_node? -->
+		</group>
+
+	</group>
+	<!-- END Odometry Learning -->
+
+	<!-- Start Coordination -->
+	<group if="$(arg coordination)">
+		<!-- Vehicle Coordinator-->
+		<remap from="simple_coordinator_node/mode" to="fsm_node/mode" />
+		<remap from="simple_coordinator_node/signals_detection" to="LED_interpreter_node/signals_detection" />
+		<!--the following remap is done through led_patter_switch_node -->
+        <!--remap from="simple_coordinator_node/change_color_pattern" to="led_emitter_node/change_color_pattern" /-->
+		<include file="$(find veh_coordinator)/launch/simple_coordinator_node.launch">
+			<arg name="veh" value="$(arg veh)"/>        
+			<arg name="config" value="$(arg config)"/>        
+			<arg name="param_file_name" value="$(arg param_file_name)"/>    
+            <arg name="intersectionType" value="$(arg intersectionType)" />    
+		</include>
+	</group>
+
+	<group unless="$(arg coordination)">
+	  <!-- Vehicle Coordinator-->
+	  <remap from="fake_coordinator_node/mode" to="fsm_node/mode" />
+	  <include file="$(find veh_coordinator)/launch/fake_coordinator_node.launch">
+	    <arg name="veh" value="$(arg veh)"/>        
+	    <arg name="config" value="$(arg config)"/>        
+	    <arg name="param_file_name" value="$(arg param_file_name)"/>        
+	  </include>
+	  <!-- Extra Remapping to make the fake coordination car cmds look real -->
+	  <remap from="fake_coordinator_node/car_cmd" to="simple_coordinator_node/car_cmd"/>
+	</group>
+
+	<!-- End Coordination -->
+
+	<!-- Start Navigation -->
+	<group if="$(arg navigation)">
+		
+		<group if="$(arg /navigation/intersection_control)">
+			<!-- open loop intersection_controller -->
+			<remap from="open_loop_intersection_control_node/mode" to="fsm_node/mode"/>
+			<remap from="open_loop_intersection_control_node/lane_pose" to="lane_filter_node/lane_pose"/>
+			<remap from="open_loop_intersection_control_node/stop_line_reading" to="stop_line_filter_node/stop_line_reading"/>
+			<remap from="open_loop_intersection_control_node/in_lane" to="lane_filter_node/in_lane"/>
+			<include file="$(find intersection_control)/launch/open_loop_intersection_controller_node.launch">
+				<arg name="veh" value="$(arg veh)"/>        
+				<arg name="config" value="$(arg config)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+			</include>
+		</group>
+
+        <group if="$(arg /navigation/random_sr_turns)">
+			<!-- random april tags -->
+			<remap from="sr_turns_node/mode" to="fsm_node/mode"/>
+			<remap from="sr_turns_node/turn_type" to="open_loop_intersection_control_node/turn_type"/> <!-- remapping outputs since there are two different possible turn types -->
+
+			<include file="$(find navigation)/launch/sr_turns_node.launch">
+				<arg name="veh" value="$(arg veh)"/>        
+				<arg name="config" value="$(arg config)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+			</include>
+		</group>
+
+		<group if="$(arg /navigation/apriltags_random)">
+			<!-- random april tags -->
+			<remap from="random_april_tag_turns_node/mode" to="fsm_node/mode"/>
+			<remap from="random_april_tag_turns_node/tag"  to="apriltags_postprocessing_node/apriltags_out"/>
+			<remap from="random_april_tag_turns_node/turn_type" to="open_loop_intersection_control_node/turn_type"/> <!-- remapping outputs since there are two different possible turn types -->
+
+			<include file="$(find navigation)/launch/random_april_tag_turns_node.launch">
+				<arg name="veh" value="$(arg veh)"/>        
+				<arg name="config" value="$(arg config)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+			</include>
+		</group>
+
+		<group if="$(arg /navigation/graph_planner)">
+			<remap from="actions_dispatcher_node/fsm_mode" to="fsm_node/mode" />
+			<remap from="actions_dispatcher_node/turn_type" to="open_loop_intersection_control_node/turn_type" /> <!-- remapping outputs since there are two different possible turn types -->
+
+			<include file="$(find navigation)/launch/graph_search_server_node.launch">
+				<arg name="map_name" value="$(arg map_name)"/>        
+				<arg name="veh" value="$(arg veh)"/>
+				<arg name="config" value="$(arg config)"/>        
+				<arg name="param_file_name" value="$(arg param_file_name)"/>        
+			</include>
+
+	        	<include file="$(find navigation)/launch/actions_dispatcher_node.launch">
+ 				<arg name="veh" value="$(arg veh)"/>        
+				<arg name="config" value="$(arg config)"/>        
+				<arg name="param_file_name" value="$(arg fsm_file_name)"/>        
+        		</include>
+		</group>
+		
+	</group>
+	<!-- End Navigation -->
+
+	<!-- Start Parallel Autonomy -->
+	<group if="$(arg parallel_autonomy)">
+		<remap from="lane_supervisor_node/lane_pose" to="lane_filter_node/lane_pose"/>
+		<remap from="lane_supervisor_node/car_cmd_joy" to="joy_mapper_node/car_cmd"/>
+		<remap from="lane_supervisor_node/car_cmd_lane" to="lane_controller_node/car_cmd"/>
+		<remap from="lane_supervisor_node/stop_line_reading" to="stop_line_filter_node/stop_line_reading"/>
+		<remap from="intersection_supervisor_node/mode" to="fsm_node/mode"/>
+		<remap from="intersection_supervisor_node/joy" to="joy"/>
+		<remap from="intersection_supervisor_node/turn_type" to="open_loop_intersection_control_node/turn_type" /> 
+		<remap from="intersection_supervisor_node/tag"  to="apriltags_postprocessing_node/apriltags_out"/>
+		<remap from="intersection_supervisor_node/intersection_done" to="open_loop_intersection_control_node/intersection_done"/>
+		<include file="$(find parallel_autonomy)/launch/lane_supervisor_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>        
+		</include>
+		<include file="$(find parallel_autonomy)/launch/intersection_supervisor_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>        
+		</include>
+	</group>
+	<!-- End Parallel Autonomy -->
+
+	<!-- Start Global Localization -->
+	<group if="$(arg global_localizer)">
+		<!-- TODO -->
+
+	</group>
+	<!-- End Global Localization -->
+
+	<!-- Start SLAM -->
+	<group if="$(arg SLAM)">
+		<!-- TODO -->
+	</group>
+	<!-- End SLAM -->
+
+
+	<!-- Start anti-instagram -->
+	<group if="$(arg anti_instagram)">
+	  <!-- NOT LOADING PARAMS FROM A YAML FILE -->
+      <remap from="anti_instagram_node/uncorrected_image" to="camera_node/image/compressed" />
+      <include file="$(find anti_instagram)/launch/anti_instagram_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+      </include>
+</group>
+	<!-- End anti-instagram -->
+
+	<!-- Start localization -->
+	<group if="$(arg localization)">
+		<!-- duckietown_description -->
+		<include file="$(find duckietown_description)/launch/duckietown_description_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="gui" value="$(arg /localization/gui)"/>
+			<arg name="map_name" value="$(arg /localization/map_name)"/>
+		</include>
+
+		<!-- localization -->
+		<remap from="localization_node/apriltags" to="apriltags_postprocessing_node/apriltags_out"/>
+		<include file="$(find localization)/launch/localization_node.launch">
+			<arg name="veh" value="$(arg veh)"/>
+			<arg name="local" value="$(arg /localization/local)"/>
+			<arg name="config" value="$(arg config)"/>
+			<arg name="param_file_name" value="$(arg param_file_name)"/>
+		</include>
+	</group>
+	<!-- End localization -->
+
+</launch>
