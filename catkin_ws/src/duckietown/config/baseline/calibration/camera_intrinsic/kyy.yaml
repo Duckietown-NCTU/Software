@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [261.1685146025499, 0.0, 334.4100578241452, 0.0, 264.61329166349736, 225.7996296078088,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: kyy/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.30161449135426827, 0.05611396174494296, -0.00023110475471322788, 0.0010758591081295407,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [208.28834533691406, 0.0, 288.7085859943727, 0.0, 0.0, 211.74212646484375,
+    259.48033105546347, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3
