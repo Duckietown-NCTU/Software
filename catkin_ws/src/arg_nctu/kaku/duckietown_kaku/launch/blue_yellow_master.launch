@@ -48,7 +48,7 @@
 
 
     <arg name="yellow" default="$(arg yellow)"/>
-    <arg name="gc" default="$(arg gc)"/>
+    <arg name="gc" default="false"/>
 
 	<!-- end switch args -->
 	

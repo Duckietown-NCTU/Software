@@ -2,7 +2,7 @@
     <arg name="veh" doc="Name of vehicle. ex: megaman"/>
     <arg name="switch" default="true"/>
     <arg name="pkg_name" value="duckietown_kaku"/>
-    <arg name="node_name" default="grab"/>
+    <arg name="node_name" default="dc_grab"/>
 
     <group ns="$(arg veh)">   
 	<include if="$(arg switch)" file="$(find duckietown)/machines"/>     
