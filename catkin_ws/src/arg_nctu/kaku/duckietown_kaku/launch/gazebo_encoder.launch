@@ -17,7 +17,12 @@
 
 
     <!-- encoder_publisher -->
-     <include file="$(find duckietown_kaku)/launch/encoder_publisher_node.launch">
+     <include file="$(find duckietown_kaku)/launch/gazebo_publisher_node.launch">
+        <arg name="veh" value="$(arg veh)"/>
+    </include>
+
+    <!-- dc_grab -->
+     <include file="$(find duckietown_kaku)/launch/dc_grab.launch">
         <arg name="veh" value="$(arg veh)"/>
     </include>
     

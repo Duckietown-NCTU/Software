@@ -36,7 +36,8 @@ class CameraNode(object):
         self.framerate = self.framerate_high # default to high
         self.camera.framerate = self.framerate
         self.camera.resolution = (self.res_w,self.res_h)
-
+        time.sleep(1)
+        self.camera.awb_mode = 'incandescent'
 
         # For intrinsic calibration
         rospack = rospkg.RosPack()

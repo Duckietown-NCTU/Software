@@ -23,7 +23,7 @@ class encoder_publisher(object):
 		self.x = 0
 		self.y = 0
 		self.th = 0
-		self.d_PerCount = (3.14159265 * 0.13) / 5940;
+		self.d_PerCount = ((3.14159265 * 0.13) / 5940)*0.3/0.635
 		self.Length =  0.18
 		self.previousR = 0
 		self.previousL = 0
@@ -46,24 +46,23 @@ class encoder_publisher(object):
 
 	def cbEncoder(self, encoder_msg):
 
-		delta_R = (encoder_msg.x - previousR) * self.d_PerCount
-		delta_L= (encoder_msg.y - previousL) * self.d_PerCount
+		delta_R = (encoder_msg.x - self.previousR) * self.d_PerCount
+		delta_L= (encoder_msg.y - self.previousL) * self.d_PerCount
 		delta_S = (delta_R + delta_L)/2
+		print "encoder_msg.x = ",encoder_msg.x," encoder_msg.y = ",encoder_msg.y
+		#print "previousR = ",self.previousR," previousL = ",self.previousL
 
-		self.th = (delta_R - delta_L)/self.Length + self.th
+		self.th = ((delta_L - delta_R)/self.Length + self.th)
 		self.x = delta_S * math.cos(self.th) + self.x
 		self.y = delta_S * math.sin(self.th) + self.y
-		
-
-
-
-
+	
+		print "x = ",self.x," y = ",self.y," th = ",self.th	
 		
 		trans_msg = TransformStamped()
 		trans_msg.header.frame_id = 'world'
 		trans_msg.child_frame_id = 'duckiebot'
-		trans_msg.transform.translation.x = self.x * self.scale + self.shift_x
-		trans_msg.transform.translation.y = self.y * self.scale + self.shift_y
+		trans_msg.transform.translation.x = self.x + 0.72
+		trans_msg.transform.translation.y = self.y + 1.24
 		trans_msg.transform.translation.z = 0.1
 
 		new_quaternion = tf.transformations.quaternion_from_euler(0, 0, self.th)
@@ -85,8 +84,8 @@ class encoder_publisher(object):
 		self.line_marker.colors.append(self.color)
 		self.pub_marker.publish(self.line_marker)
 
-		previousR = encoder_msg.x
-		previousL = encoder_msg.y
+		self.previousR = encoder_msg.x
+		self.previousL = encoder_msg.y
 
 
 	def set_line_marker(self):
@@ -99,10 +98,7 @@ class encoder_publisher(object):
 		self.color.g = 1.0
 		self.color.b = 0.0
 		self.color.a = 1
-		if self.tango == "true":
-			self.line_marker.scale.x = 0.075
-		else:
-			self.line_marker.scale.x = 0.01
+		self.line_marker.scale.x = 0.01
 if __name__ == "__main__":
 	rospy.init_node("encoder_publisher",anonymous=False)
 	encoder_publisher = encoder_publisher()

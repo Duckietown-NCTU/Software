@@ -270,10 +270,20 @@ buyme:
   name: ARG-car12
 
 hercules:
+  name: hercule
+
+jackie:
+  name: ARG-car21
   name: hercules
 
 gcdog:
-  name: GC
+  name: PKG
+
+gcleft:
+  name: PKG
+
+gcright:
+  name: PKG
 
 sb1:
   name: spiderbot1
