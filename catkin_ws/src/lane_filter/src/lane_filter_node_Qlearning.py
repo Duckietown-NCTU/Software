@@ -172,7 +172,7 @@ For more info on algorithm and parameters please refer to the google doc:
             position_x = 2
             position_y = 8
             count=0
-            while ~(position_x == gaol_x && position_y == gaol_y)
+            while ~(position_x == gaol_x & position_y == gaol_y)
                 a=0.9
                 b=0.8
                 t_pre = map_seg(position_x,1)
@@ -216,7 +216,7 @@ For more info on algorithm and parameters please refer to the google doc:
                     b=0
 
 
-                if(position_x == gaol_x && position_y == gaol_y)
+                if(position_x == gaol_x & position_y == gaol_y)
                     reward=100
                     b=0
 
