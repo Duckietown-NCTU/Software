@@ -119,7 +119,8 @@ For more info on algorithm and parameters please refer to the google doc:
         # initialize measurement likelihood
         measurement_likelihood = np.zeros(self.d.shape)
         # Q learning
-        # high,wid
+        high=480
+        wid=640
         size_x = 15
         size_y = 7
         qtable = zeros(size_x,size_y,3)
