@@ -229,19 +229,20 @@ For more info on algorithm and parameters please refer to the google doc:
                 new_q=old_q+a*(reward+b*max_qtable-old_q)
 
                 qtable(pre_position_x,pre_position_y,action)=new_q
-                for i in range(1,size_x)
-                    for j in range(1,size_y)
-                        if map_matrix(i,j)==2
-                            x2=i/size_x
-                            y2=j/size_y
-                            break           
 
-                for i in range(size_x,1)[::-1]
-                    for j in range(size_y,1)[::-1]
-                         if map_matrix(i,j)==count
-                            x1=i/size_x
-                            y1=j/size_y
-                            break
+            for i in range(1,size_x)
+                for j in range(1,size_y)
+                    if map_matrix(i,j)==2
+                        x2=i/size_x
+                        y2=j/size_y
+                        break           
+
+            for i in range(size_x,1)[::-1]
+                for j in range(size_y,1)[::-1]
+                     if map_matrix(i,j)==count
+                        x1=i/size_x
+                        y1=j/size_y
+                        break
 
 
             segment.points[0].x=x1*wid
