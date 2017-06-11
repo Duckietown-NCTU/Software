@@ -4,7 +4,6 @@ import roscpp
 import numpy as np
 import math
 from geometry_msgs.msg import Pose, Point, Quaternion, TransformStamped,Twist
-from gazebo_msgs.msg import ModelState
 from visualization_msgs.msg import Marker, MarkerArray
 from std_msgs.msg import ColorRGBA, Int64
 import tf
