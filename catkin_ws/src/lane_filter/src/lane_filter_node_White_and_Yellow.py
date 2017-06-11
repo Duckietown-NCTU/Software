@@ -118,6 +118,7 @@ For more info on algorithm and parameters please refer to the google doc:
 
         # initialize measurement likelihood
         measurement_likelihood = np.zeros(self.d.shape)
+
         z = 0
         for segment in segment_list_msg.segments:
             if segment.color == segment.WHITE  and z == 0:
@@ -128,9 +129,9 @@ For more info on algorithm and parameters please refer to the google doc:
                 z=3
             if segment.color == segment.YELLOW and z == 1:
                 z=3
-	if z != 3:
+        if z != 3:
             return
-	
+
         for segment in segment_list_msg.segments:
             if segment.color != segment.WHITE and segment.color != segment.YELLOW:
                 continue
@@ -267,12 +268,13 @@ For more info on algorithm and parameters please refer to the google doc:
         d_i = (d1+d2)/2
         phi_i = np.arcsin(t_hat[1])
         if segment.color == segment.WHITE: # right lane is white
-            if(p1[0] > p2[0]): # right edge of white lane
-                d_i = d_i - self.linewidth_white
-            else: # left edge of white lane
-                d_i = - d_i
-                phi_i = -phi_i
-            d_i = d_i - self.lanewidth/2
+            print 'skip' 
+		   # if(p1[0] > p2[0]): # right edge of white lane
+           #     d_i = d_i - self.linewidth_white
+           # else: # left edge of white lane
+           #     d_i = - d_i
+           #     phi_i = -phi_i
+           # d_i = d_i - self.lanewidth/2
 
         elif segment.color == segment.YELLOW: # left lane is yellow
             if (p2[0] > p1[0]): # left edge of yellow lane

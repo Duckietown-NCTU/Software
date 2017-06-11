@@ -55,7 +55,7 @@ For more info on algorithm and parameters please refer to the google doc:
 
         # Subscribers
         if self.use_propagation:
-            self.sub_velocity = rospy.Subscriber("~velocity", Twist2DStamped, self.updateVelocity)
+            self.sub_velocity = rospy.Subscriber("/lane_filter_node/velocity", Twist2DStamped, self.updateVelocity)
         self.sub = rospy.Subscriber("~segment_list", SegmentList, self.processSegments, queue_size=1)
 
         # Publishers
@@ -118,27 +118,152 @@ For more info on algorithm and parameters please refer to the google doc:
 
         # initialize measurement likelihood
         measurement_likelihood = np.zeros(self.d.shape)
+        # Q learning
+        high=480
+        wid=640
+        size_x = 15
+        size_y = 7
+        qtable = zeros(size_x,size_y,3)
+        round1 = 0
+        map_seg = zeros(size_x,size_y)
 
-        z = 0
-        for segment in segment_list_msg.segments:
-            if segment.color == segment.WHITE  and z == 0:
-                z=1
-            if segment.color == segment.YELLOW and z == 0:
-                z=2
-            if segment.color == segment.WHITE  and z == 2:
-                z=3
-            if segment.color == segment.YELLOW and z == 1:
-                z=3
-        if z != 3:
-            return
+        for i in range(1,size_x)
+            for j in range(1,size_y)
+                if ((i==1)|(i==size_x))
+                    map_seg(i,j)=1
+                elif((j==1)|(j==size_y))
+                    map_seg(i,j)=1
 
         for segment in segment_list_msg.segments:
-            if segment.color != segment.WHITE and segment.color != segment.YELLOW:
+
+            x1=segment.points[0].x/wid
+            y1=segment.points[0].y/high
+            x2=segment.points[1].x/wid
+            y2=segment.points[1].y/high
+
+            if segment.color == segment.YELLOW
+                for i in range(round(y1*size_y),round(y2*size_y))
+                    for j in range(1,round(i*(x2-x1)/(y2-y1)))
+                        map_seg(j,i)=1
+
+            elif segment.color == segment.WHITE
+                for i in range(round(y1*size_y),round(y2*size_y))
+                    for j in range(round(i*(x2-x1)/(y2-y1)),size_x)
+                        map_seg(j,i)=1
+
+
+        t_pre = map_seg(6,1)
+
+        for i in range(1,15)
+            t = map_seg(6,i)
+            if (t < t_pre)  
+                s = i
+            elif (t > t_pre)  
+                e = i
+            t_pre = t
+
+        gaol_x = 6
+        gaol_y = (s+e)/2
+
+
+        while round1<50
+
+            map_matrix = map_seg
+            round1 = round1+1
+            position_x = 2
+            position_y = 8
+            count=0
+            while ~(position_x == gaol_x & position_y == gaol_y)
+                a=0.9
+                b=0.8
+                t_pre = map_seg(position_x,1)
+                for i in range(1,15)
+                    t = map_seg(position_x,i)
+                    if     (t < t_pre)  
+                        s = i
+                    elif (t > t_pre)  
+                        e = i
+                    t_pre = t
+
+                dis = (position_y-s) - (e-position_y)
+                if (dis <= 0)  
+                    reward =  5*dis
+                elif (dis >  0)  
+                    reward =  -5*dis
+                count = count+1
+                rand_action = round( random.randint(1,3) )
+                max_q = max([qtable(position_x,position_y,1) qtable(position_x,position_y,2) qtable(position_x,position_y,3) ])
+                max_index = values.index(max([qtable(position_x,position_y,1) qtable(position_x,position_y,2) qtable(position_x,position_y,3) ]))
+                if( qtable(position_x,position_y,rand_action) >= qtable(position_x,position_y,max_index) )
+                    action = rand_action
+                else
+                    action = max_index
+                map_matrix(position_x,position_y) = count
+
+                pre_position_x = position_x
+                pre_position_y = position_y
+
+                if action ==1
+                    position_x = pre_position_x+1
+                elif action ==2
+                    position_y = pre_position_y-1
+                elif action ==3
+                    position_y = pre_position_y+1
+
+                if(map_seg(position_x,position_y) == 1)
+                    position_x = pre_position_x
+                    position_y = pre_position_y
+                    reward=-100
+                    b=0
+
+
+                if(position_x == gaol_x & position_y == gaol_y)
+                    reward=100
+                    b=0
+
+
+                max_qtable = max([qtable(position_x,position_y,1) qtable(position_x,position_y,2) qtable(position_x,position_y,3) ])
+                max_qtable_index = values.index(max([qtable(position_x,position_y,1) qtable(position_x,position_y,2) qtable(position_x,position_y,3) ]))
+
+                old_q=qtable(pre_position_x,pre_position_y,action)
+                new_q=old_q+a*(reward+b*max_qtable-old_q)
+
+                qtable(pre_position_x,pre_position_y,action)=new_q
+
+            for i in range(1,size_x)
+                for j in range(1,size_y)
+                    if map_matrix(i,j)==2
+                        x2=i/size_x
+                        y2=j/size_y
+                        break           
+
+            for i in range(size_x,1)[::-1]
+                for j in range(size_y,1)[::-1]
+                     if map_matrix(i,j)==count
+                        x1=i/size_x
+                        y1=j/size_y
+                        break
+
+
+            segment.points[0].x=x1*wid
+            segment.points[0].y=y1*high
+            segment.points[1].x=x2*wid
+            segment.points[1].y=y2*high
+
+##########################################################
+
+        for segment in segment_list_msg.segments:
+            if segment.color != segment.YELLOW:
                 continue
             if segment.points[0].x < 0 or segment.points[1].x < 0:
                 continue
 
             d_i,phi_i,l_i = self.generateVote(segment)
+
+	    #print "d= " + `d_i` + "    phi= " + `phi_i`
+#	    if phi_i > 0:
+#		continue
+
             if d_i > self.d_max or d_i < self.d_min or phi_i < self.phi_min or phi_i>self.phi_max:
                 continue
             if self.use_max_segment_dist and (l_i > self.max_segment_dist):
@@ -268,20 +393,23 @@ For more info on algorithm and parameters please refer to the google doc:
         d_i = (d1+d2)/2
         phi_i = np.arcsin(t_hat[1])
         if segment.color == segment.WHITE: # right lane is white
-            print 'skip' 
-		   # if(p1[0] > p2[0]): # right edge of white lane
-           #     d_i = d_i - self.linewidth_white
-           # else: # left edge of white lane
-           #     d_i = - d_i
-           #     phi_i = -phi_i
-           # d_i = d_i - self.lanewidth/2
+            print 'skip white'
+	    
+	 #   if(p1[0] > p2[0]): # right edge of white lane
+         #       d_i = d_i - self.linewidth_white
+         #   else: # left edge of white lane
+         #       d_i = - d_i
+         #       phi_i = -phi_i
+         #   d_i = d_i - self.lanewidth/2
 
         elif segment.color == segment.YELLOW: # left lane is yellow
             if (p2[0] > p1[0]): # left edge of yellow lane
                 d_i = d_i - self.linewidth_yellow
                 phi_i = -phi_i
+               # print 'left edge of yellow'
             else: # right edge of white lane
                 d_i = -d_i
+               # print 'right edge of yellow'
             d_i =  self.lanewidth/2 - d_i
 
         return d_i, phi_i, l_i
