@@ -11,6 +11,10 @@
 
 \overrideIEEEmargins                                      % Needed to meet printer requirements.
 
+\usepackage{graphicx}
+\graphicspath{ {/home/robotvision/duckietown/catkin_ws/src/spring2017_nctu/porsche/0560024
+} } % Path of image
+
 % See the \addtolength command later in the file to balance the column lengths
 % on the last page of the document
 
@@ -69,8 +73,7 @@ The organization of the report is as follows: first, in Section II, we give an o
 
 \subsection{Amazon Picking Challenge}
 
-First, confirm that you have the correct template for your paper size. This template has been tailored for output on the US-letter paper size. 
-It may be used for A4 paper size if the paper size setting is suitably modified.
+It is the competition organized by Amazon Robotics. The goal of the challenge is to strengthen the ties between the industrial and academic robotic communities and promote shared and open solution to some of the big problems in unstructured automation.
 
 \subsection{Team Delft}
 
@@ -82,7 +85,14 @@ Before you begin to format your paper, first write and save the content as a sep
 
 Finally, complete content and organizational editing before formatting. Please take note of the following items when proofreading spelling and grammar:
 
-\subsection{Intel Realsense SR300} Define abbreviations and acronyms the first time they are used in the text, even after they have been defined in the abstract. Abbreviations such as IEEE, SI, MKS, CGS, sc, dc, and rms do not have to be defined. Do not use abbreviations in the title or heads unless they are unavoidable.
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{system_architecture.PNG}
+    \caption{System Architecture}
+    \label{fig:system_architecture}
+\end{figure}
+
+\subsection{Intel Realsense SR300} Intel Realsense SR300 is a RGB-D camera. In this project, the RGB-D camera is used to capture RGB image and depth image of the target object. Both of the two kinds of image data are used in object segmentation stage and pose estimation stage of the algorithm. The resolution of RGB image is 640*480 pixel and the resolution of depth image is 640*480 pixel. The range of depth capturing is 0.2m to 1.5m. 
 
 \subsection{Object Segmentation}
 
