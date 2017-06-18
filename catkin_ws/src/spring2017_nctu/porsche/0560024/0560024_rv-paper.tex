@@ -73,26 +73,32 @@ The organization of the report is as follows: first, in Section II, we give an o
 
 \subsection{Amazon Picking Challenge}
 
-It is the competition organized by Amazon Robotics. The goal of the challenge is to strengthen the ties between the industrial and academic robotic communities and promote shared and open solution to some of the big problems in unstructured automation.
+It is the competition organized by Amazon Robotics. The goal of the challenge is to strengthen the ties between the industrial and academic robotic communities and promote shared and open solution to some of the big problems in unstructured automation.Each team builds up the hardware on its own and developes the object recognition algorithm and pose estimation algorithm to complete the tasks in the challenge. 
 
 \subsection{Team Delft}
 
-The template is used to format your paper and style the text. All margins, column widths, line spaces, and text fonts are prescribed; please do not alter them. You may note peculiarities. For example, the head margin in this template measures proportionately more than is customary. This measurement and others are deliberate, using specifications that anticipate your paper as one part of the entire proceedings, and not as an independent document. Please do not revise any of the current designations
+Team Delft was one of 16 finalists for the Amazon Picking Challenge, and it is the championship of APC 2016. Team Delft used two industrial stereo camera's with RGB overlay camera's. One for detection of objects in the tote and the other on the robot gripper to scan the bins. For object recognition, Team Delft used deep learning neural network based on Faster RCNN then performed localization using the implemetation of super4PCS to do global optimation of the pose estimation. Finally, ICP was used to refined the estimation.
 
 \section{TECHNICAL PARTS}
 
-Before you begin to format your paper, first write and save the content as a separate text file. Keep your text and graphic files separate until after the text has been formatted and styled. Do not use hard tabs, and limit use of hard returns to only one return at the end of a paragraph. Do not add any kind of pagination anywhere in the paper. Do not number text heads-the template will do that for you.
+The system architecture is shown in figure \ref{fig:system_architecture}. We capture RGB images and depth images using Realsense SR300 and Realsense-standalone function. RGB image, raw depth image, image of depth aligned to color and the Cam-Info.txt are the outputs of the Realsense-standalone. Cam-Info.txt contains camera parameters, such as color intrinsics, depth intrinsics and depth-to-color extrinsics. RGB images, depth-aligned-to-color images and Cam-Info.txt are used for object recognition and pose estimation. First, the we get HHA features using depth images and HHA features contain three information,  horizontal disparity, height above ground and angle between surface normal and gravity. Next, we do image segmentation using pretrained fully convolutional neural network. In this step, object will be recognized and segmented from the image. After segmentation, we do pose estimation and show the bounding boxes on RGB images.
 
-Finally, complete content and organizational editing before formatting. Please take note of the following items when proofreading spelling and grammar:
-
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{system_architecture.PNG}
     \caption{System Architecture}
     \label{fig:system_architecture}
 \end{figure}
 
-\subsection{Intel Realsense SR300} Intel Realsense SR300 is a RGB-D camera. In this project, the RGB-D camera is used to capture RGB image and depth image of the target object. Both of the two kinds of image data are used in object segmentation stage and pose estimation stage of the algorithm. The resolution of RGB image is 640*480 pixel and the resolution of depth image is 640*480 pixel. The range of depth capturing is 0.2m to 1.5m. 
+\subsection{Intel Realsense SR300} Intel Realsense SR300, shown in figure \ref{fig:realsense_sr300}, is a RGB-D camera. In this project, the RGB-D camera is used to capture RGB image and depth image of the target object. Both of the two kinds of image data are used in object segmentation stage and pose estimation stage of the algorithm. The resolution of RGB image is 640*480 pixels and the resolution of depth image is 640*480 pixels. The range of depth capturing is 0.2m to 1.5m. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{realsense_sr300.JPEG}
+    \caption{Intel Realsense SR300}
+    \label{fig:realsense_sr300}
+\end{figure}
+
 
 \subsection{Object Segmentation}
 
