@@ -123,13 +123,32 @@ For more info on algorithm and parameters please refer to the google doc:
         #Q_learning#######################
         #generate map_seg
         #iner size
-        n = 1
-        size_x = 6*n
-        size_y = 8*n+1
-        W = 640
-        H = 480
+        n = 2
+        size_x = 4*n
+        size_y = 6*n+1
+	
+        # find max_x max_y min_x min_y
+		#max_x = segment_list_msg.segments[0].points[0].x
+        max_x = 0
+        min_x = max_x
+		#max_y = segment_list_msg.segments[0].points[0].y
+        max_y = 0
+        min_y = max_y
+        for segment in segment_list_msg.segments:
+            if (max_x < segment.points[0].x): max_x = segment.points[0].x
+            if (max_x < segment.points[1].x): max_x = segment.points[1].x
+            if (min_x > segment.points[0].x): min_x = segment.points[0].x
+            if (min_x > segment.points[1].x): min_x = segment.points[1].x   
+            if (max_y < segment.points[0].y): max_y = segment.points[0].y 
+            if (max_y < segment.points[1].y): max_y = segment.points[1].y
+            if (min_y > segment.points[0].y): min_y = segment.points[0].y
+            if (min_y > segment.points[1].y): min_y = segment.points[1].y
+
+        W = float(max_x - min_x)
+        H = float(max_y - min_y)
         map_seg = np.zeros((size_x+2, size_y+2))
-        segment = np.array([[  1,  1,100,100,0],
+        '''
+	    segment = np.array([[  1,  1,100,100,0],
                                [110,130,180,240,0],
                                [190,250,210,340,0],
                                [220,350,250,480,0],
@@ -137,13 +156,12 @@ For more info on algorithm and parameters please refer to the google doc:
                                [495,240,520,350,1],
                                [520,370,600,480,1],
                                [450,150,450,230,1]])
-        
+        '''       
         for segment in segment_list_msg.segments:
-            x1 = float(segment.points[0].x) / W
-            y1 = float(segment.points[0].y) / H
-            x2 = float(segment.points[1].x) / W
-            y2 = float(segment.points[1].y) / H
-        
+            x1 = float(segment.points[0].x - min_x) / W
+            y1 = float(segment.points[0].y - min_y) / H
+            x2 = float(segment.points[1].x - min_x) / W
+            y2 = float(segment.points[1].y - min_y) / H        
             
             #border
             for i in range(len(map_seg)):
@@ -303,19 +321,22 @@ For more info on algorithm and parameters please refer to the google doc:
                 new_segment[n,0] = new_segment_t[i+1,0]
                 new_segment[n,1] = new_segment_t[i+1,1]
         print new_segment
-        for i in range((size_x-1)):
-            x1 = new_segment[i*2+0,0]
-            y1 = new_segment[i*2+0,1]
-            x2 = new_segment[i*2+0,2]
-            y2 = new_segment[i*2+0,3]
-            new_segment[i*2+0,0] = int((x1+1)*W/size_y)
-            new_segment[i*2+0,1] = int( y1   *H/size_x)
-            new_segment[i*2+0,2] = int((x2+1)*W/size_y)
-            new_segment[i*2+0,3] = int( y2   *H/size_x)
-            new_segment[i*2+1,0] = int( x1   *W/size_y)
-            new_segment[i*2+1,1] = int((y1+1)*H/size_x)
-            new_segment[i*2+1,2] = int( x2   *W/size_y)
-            new_segment[i*2+1,3] = int((y2+1)*H/size_x)
+        size_x_t = size_x
+        size_x = float(size_x)
+        size_y = float(size_y)
+        for i in range((size_x_t-1)):
+            x1 = float(new_segment[i*2+0,0])
+            y1 = float(new_segment[i*2+0,1])
+            x2 = float(new_segment[i*2+0,2])
+            y2 = float(new_segment[i*2+0,3])
+            new_segment[i*2+0,0] = ((x1+1)*W/size_y) + min_y
+            new_segment[i*2+0,1] = ( y1   *H/size_x) + min_x
+            new_segment[i*2+0,2] = ((x2+1)*W/size_y) + min_y
+            new_segment[i*2+0,3] = ( y2   *H/size_x) + min_x
+            new_segment[i*2+1,0] = ( x1   *W/size_y) + min_y
+            new_segment[i*2+1,1] = ((y1+1)*H/size_x) + min_x
+            new_segment[i*2+1,2] = ( x2   *W/size_y) + min_y
+            new_segment[i*2+1,3] = ((y2+1)*H/size_x) + min_x
         
         print new_segment
 	
@@ -435,8 +456,8 @@ For more info on algorithm and parameters please refer to the google doc:
         self.beliefRV=self.beliefRV/np.sum(self.beliefRV)#np.linalg.norm(self.beliefRV)
 
     def generateVote(self,new_segment):
-        p1 = np.array([new_segment[0].x, new_segment[1].y])
-        p2 = np.array([new_segment[2].x, new_segment[3].y])
+        p1 = np.array([new_segment[0], new_segment[1]])
+        p2 = np.array([new_segment[2], new_segment[3]])
         t_hat = (p2-p1)/np.linalg.norm(p2-p1)
         n_hat = np.array([-t_hat[1],t_hat[0]])
         d1 = np.inner(n_hat,p1)
