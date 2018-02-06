@@ -76,6 +76,10 @@ events: #Maps from subscribing topic to signal ids
     topic: "L2R_text_navigation_node/straight"
     msg_type: "BoolStamped"
     trigger: True
+  finish_turn:
+    topic: "lane_filter_node/finish_turn"
+    msg_type: "BoolStamped"
+    trigger: True
 # end adding by ARG
 
 #  lost_lane: # not tested
@@ -98,8 +102,8 @@ events: #Maps from subscribing topic to signal ids
 # Define global transitions. Available from all states.
 global_transitions:
   joystick_override_on: "JOYSTICK_CONTROL"
-  parallel_autonomy_on: "PARALLEL_AUTONOMY"
-  parallel_autonomy_off: "JOYSTICK_CONTROL"
+  #parallel_autonomy_on: "PARALLEL_AUTONOMY"
+  #parallel_autonomy_off: "JOYSTICK_CONTROL"
 
 # Define nodes 
 nodes:
@@ -128,7 +132,7 @@ states:
   JOYSTICK_CONTROL:
     transitions:
       joystick_override_off: "LANE_FOLLOWING"
-      start_avoidance: "LANE_FOLLOWING_AVOID"
+      #start_avoidance: "LANE_FOLLOWING_AVOID"
     active_nodes:
       - lane_filter_node
       - line_detector_node
@@ -168,7 +172,7 @@ states:
     transitions:
       left_turn: "LANE_FOLLOWING_TURN_LEFT"
       right_turn: "LANE_FOLLOWING_TURN_RIGHT"
-      straight: "LANE_FOLLOWING"
+      straight: "NON_NAVIGATION_SIGN"
 #      lost_lane: "LANE_RECOVERY"
     active_nodes:
 #      - decoder_node
@@ -178,26 +182,34 @@ states:
       - L2R_text_navigation_node
     lights: ["lane_following"]
 
+  NON_NAVIGATION_SIGN:
+    transitions:
+      straight: "LANE_FOLLOWING"
+    active_nodes:
+      - line_detector_node
+    lights: ["lane_following"]
 
 
   LANE_FOLLOWING_TURN_LEFT:
     transitions:
-      time_is_up: "LANE_FOLLOWING"
+      #time_is_up: "LANE_FOLLOWING"
+      finish_turn: "LANE_FOLLOWING"
 #      lost_lane: "LANE_RECOVERY"
     active_nodes:
       - lane_filter_node
       - line_detector_node
-      - timer
+  #    - timer
     lights: ["lane_following"]
 
   LANE_FOLLOWING_TURN_RIGHT:
     transitions:
-      time_is_up: "LANE_FOLLOWING"
+      #time_is_up: "LANE_FOLLOWING"
+      finish_turn: "LANE_FOLLOWING"
 #      lost_lane: "LANE_RECOVERY"
     active_nodes:
       - lane_filter_node
       - line_detector_node
-      - timer
+    #  - timer
     lights: ["lane_following"]
 
   JUPYTER_CONTROL:

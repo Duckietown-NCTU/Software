@@ -54,6 +54,10 @@ For more info on algorithm and parameters please refer to the google doc:
         self.v_avg = 0
         self.w_avg = 0
 
+        self.right_turning_time = 3 
+        self.left_turning_time = 6
+        self.turning_time = 0
+        self.inturn = False
         self.timer_switch = True
 
         # Subscribers
@@ -68,10 +72,10 @@ For more info on algorithm and parameters please refer to the google doc:
         self.pub_belief_img = rospy.Publisher("~belief_img", Image, queue_size=1)
         self.pub_entropy    = rospy.Publisher("~entropy",Float32, queue_size=1)
         #self.pub_prop_img = rospy.Publisher("~prop_img", Image, queue_size=1)
-        self.pub_in_lane    = rospy.Publisher("~in_lane",BoolStamped, queue_size=1
-)
+        self.pub_in_lane    = rospy.Publisher("~in_lane",BoolStamped, queue_size=1)
+        self.pub_finish_turn    = rospy.Publisher("~finish_turn",BoolStamped, queue_size=1)
+        # Subscribers
         self.sub_switch = rospy.Subscriber("~switch", BoolStamped, self.cbSwitch, queue_size=1)
-
         self.sub_timer = rospy.Subscriber("~time_is_up", BoolStamped, self.cbTimer)
 
         self.timer = rospy.Timer(rospy.Duration.from_sec(1.0), self.updateParams)
@@ -114,11 +118,17 @@ For more info on algorithm and parameters please refer to the google doc:
 
     def processStateChange(self, msg):
         if msg.state == "LANE_FOLLOWING_TURN_RIGHT":
-            rospy.loginfo("**************Turn Right*****************")
+            rospy.loginfo("**************Turn Right Mode*****************")
+            self.inturn = True
+            self.turning_time = self.right_turning_time
+            self.turn_time_start = time.time()
         elif msg.state == "LANE_FOLLOWING_TURN_LEFT":
-            rospy.loginfo("**************Turn Left*****************")
+            rospy.loginfo("**************Turn Left Mode*****************")
+            self.inturn = True
+            self.turning_time = self.left_turning_time
+            self.turn_time_start = time.time()
         elif msg.state == "LANE_FOLLOWING":
-            rospy.loginfo("**************state not changed*****************")
+            rospy.loginfo("**************Lane Following mode*****************")
         else:
             rospy.loginfo("**************We don't have this state*****************")
         self.state=msg.state
@@ -134,13 +144,20 @@ For more info on algorithm and parameters please refer to the google doc:
             return
         t_start = rospy.get_time()
 
+        if self.inturn:
+            if ( (time.time() - self.turn_time_start) >= self.turning_time ):
+                self.inturn = False
+                finish_turn_msg = BoolStamped()
+                finish_turn_msg.data = True
+                self.pub_finish_turn.publish(finish_turn_msg)
+
         if self.use_propagation:
             self.propagateBelief()
             self.t_last_update = rospy.get_time()
 
         # initialize measurement likelihood
         measurement_likelihood = np.zeros(self.d.shape)
-	
+
 
         for segment in segment_list_msg.segments:
 
@@ -150,7 +167,9 @@ For more info on algorithm and parameters please refer to the google doc:
             state_switch = segment.YELLOW	
 
             if segment.color != state_switch and segment.color != segment.YELLOW:
+            #if segment.color != segment.WHITE and segment.color != segment.YELLOW:
                 continue
+            
             if segment.points[0].x < 0 or segment.points[1].x < 0:
                 continue
 
@@ -159,16 +178,16 @@ For more info on algorithm and parameters please refer to the google doc:
             if not self.timer_switch:
                 if self.state == "LANE_FOLLOWING_TURN_RIGHT":
                     if phi_i <0 :
-                        print "------------------Turn Right----------------------"
+                        print "------------------In Turn Right----------------------"
                         continue
                 elif self.state == "LANE_FOLLOWING_TURN_LEFT":
                     if phi_i >0 :
-                        print "------------------Turn Left-----------------------"
+                        print "------------------In Turn Left-----------------------"
                         continue
-                else:
-                    print "---------------------- No Turn -----------------------"
-            else:
-                print "-----------------------Time is up-------------------------"
+                #else:
+                    #print "---------------------- No Turn -----------------------"
+            #else:
+                #print "-----------------------Time is up-------------------------"
 
             if d_i > self.d_max or d_i < self.d_min or phi_i < self.phi_min or phi_i>self.phi_max:
                 continue
