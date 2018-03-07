@@ -1,0 +1,55 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{Olson09icra}
+E.~Olson, ``Real-time correlative scan matching,'' in \emph{IEEE Intl. Conf. on
+  Robotics and Automation (ICRA)}, Kobe, Japan, June 2009, pp. 4387--4393.
+
+\bibitem{gouveia2015computation}
+B.~D. Gouveia, D.~Portugal, D.~C. Silva, and L.~Marques, ``Computation sharing
+  in distributed robotic systems: A case study on slam,'' \emph{IEEE
+  Transactions on Automation Science and Engineering}, vol.~12, no.~2, pp.
+  410--422, 2015.
+
+\bibitem{jiang2015design}
+Y.~Jiang, H.~Zhang, Z.~Li, Y.~Deng, X.~Song, M.~Gu, and J.~Sun, ``Design and
+  optimization of multiclocked embedded systems using formal techniques,''
+  \emph{IEEE transactions on industrial electronics}, vol.~62, no.~2, pp.
+  1270--1278, 2015.
+
+\bibitem{koenig2004design}
+N.~Koenig and A.~Howard, ``Design and use paradigms for gazebo, an open-source
+  multi-robot simulator,'' in \emph{Intelligent Robots and Systems, 2004.(IROS
+  2004). Proceedings. 2004 IEEE/RSJ International Conference on}, vol.~3.\hskip
+  1em plus 0.5em minus 0.4em\relax IEEE, 2004, pp. 2149--2154.
+
+\bibitem{yu2016portable}
+J.~Yu, S.~Han, and D.~Rus, ``A portable, 3d-printing enabled multi-vehicle
+  platform for robotics research and education,'' \emph{arXiv preprint
+  arXiv:1609.04745}, 2016.
+
+\bibitem{aguero2015inside}
+C.~E. Ag{\"u}ero, N.~Koenig, I.~Chen, H.~Boyer, S.~Peters, J.~Hsu, B.~Gerkey,
+  S.~Paepcke, J.~L. Rivero, J.~Manzo, \emph{et~al.}, ``Inside the virtual
+  robotics challenge: Simulating real-time robotic disaster response,''
+  \emph{IEEE Transactions on Automation Science and Engineering}, vol.~12,
+  no.~2, pp. 494--506, 2015.
+
+\end{thebibliography}
