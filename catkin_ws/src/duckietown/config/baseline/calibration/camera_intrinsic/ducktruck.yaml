@@ -1,0 +1,23 @@
+camera_matrix:
+  cols: 3
+  data: [320.9596161258132, 0.0, 299.6413025597213, 0.0, 325.79603321711977, 249.18169362769274,
+    0.0, 0.0, 1.0]
+  rows: 3
+camera_name: ducktruck/camera_node
+distortion_coefficients:
+  cols: 5
+  data: [-0.29216417600545463, 0.06506630742443191, -0.0020079708144916187, -9.198659600556243e-06,
+    0.0]
+  rows: 1
+distortion_model: plumb_bob
+image_height: 480
+image_width: 640
+projection_matrix:
+  cols: 4
+  data: [226.75741577148438, 0.0, 299.1679913003791, 0.0, 0.0, 259.3316650390625,
+    251.62690716373618, 0.0, 0.0, 0.0, 1.0, 0.0]
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  rows: 3

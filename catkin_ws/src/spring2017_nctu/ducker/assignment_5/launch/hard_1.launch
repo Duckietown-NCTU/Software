@@ -1,0 +1,19 @@
+<launch>
+    <arg name="veh"/>
+
+    <include file="$(find assignment_5)/launch/core.launch">
+      <arg name="veh" value="$(arg veh)"/>
+    </include>
+
+    <include file="$(find duckietown)/launch/camera.launch">
+      <arg name="veh" value="$(arg veh)"/>
+      <arg name="raw" value="true"/>
+    </include>
+
+    <include file="$(find duckietown_unit_test)/launch/ground_projection_test1.launch">
+      <arg name="veh" value="$(arg veh)"/>
+      <arg name="rectify" value="true"/>
+    </include>
+
+    <include file="$(find assignment_5)/launch/ball_follower.launch"/>
+</launch>

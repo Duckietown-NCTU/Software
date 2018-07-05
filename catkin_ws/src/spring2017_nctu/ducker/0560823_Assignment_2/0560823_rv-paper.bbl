@@ -1,0 +1,27 @@
+\begin{thebibliography}{1}
+
+\bibitem{Campbell2005}
+J.~Campbell, R.~Sukthankar, I.~Nourbakhsh, and A.~Pahwa, ``{A robust visual
+  odometry and precipice detection system using consumer-grade monocular
+  vision},'' {\em Proceedings - IEEE International Conference on Robotics and
+  Automation}, vol.~2005, pp.~3421--3427, 2005.
+
+\bibitem{Leutenegger2013}
+S.~Leutenegger, P.~Furgale, V.~Rabaud, M.~Chli, K.~Konolige, and R.~Siegwart,
+  ``{Keyframe-Based Visual-Inertial {\{}SLAM{\}} Using Nonlinear
+  Optimization},'' {\em Proc. of Robot.: Sci. and Syst.}, p.~0, 2013.
+
+\bibitem{Nister2005}
+D.~Nister, O.~Naroditsky, and J.~Bergen, ``{Visual odometry},'' {\em Computer
+  Vision and Pattern Recognition (CVPR)}, vol.~1, pp.~652--659, 2005.
+
+\bibitem{Rusu2011}
+R.~B. Rusu and S.~Cousins, ``{3D is here: point cloud library},'' {\em IEEE
+  International Conference on Robotics and Automation}, pp.~1 -- 4, 2011.
+
+\bibitem{Schnabel2007}
+R.~Schnabel, R.~Wahl, and R.~Klein, ``{Efficient RANSAC for point-cloud shape
+  detection},'' {\em Computer Graphics Forum}, vol.~26, no.~2, pp.~214--226,
+  2007.
+
+\end{thebibliography}

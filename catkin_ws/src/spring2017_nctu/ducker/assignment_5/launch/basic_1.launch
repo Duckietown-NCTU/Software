@@ -1,0 +1,8 @@
+<launch>
+    <arg name="veh"/>
+
+    <include file="$(find assignment_5)/launch/core.launch">
+      <arg name="veh" value="$(arg veh)"/>
+    </include>
+    <include file="$(find assignment_5)/launch/tank_node.launch"/>
+</launch>

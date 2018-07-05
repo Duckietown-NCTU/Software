@@ -1,0 +1,9 @@
+Assignment 5, team 8 (Yury, Alex):
+
+Tasks finished:
+
+Easy 1: Joy mapper. New node created and replaced the "joy_mapper_node", in this node you control your duckiebot wheels directly. Left stick - left wheel, right stick - right wheel. Like a tank.
+
+Easy 2: Object detection. Duckiebot detects yellow ball. Note, that yellow is a bad choice, you don't even imagine how many yellow...ish things exist around, but I have only yellow ball around. Place duckiebot opposite the wall which is DEFINITELY NOT YELLOW EVEN REMOTE, and place the tennis ball in front of it. The result is published to the topic /result_image.
+
+Hard 1: Yellow ball following. Place your duckiebot in the CLEAN FREE OF OBSTRUCTION environment with NO YELLOW THINGS AROUND!!! NO DUCKIES!!! Make sure your environment is well lit. The duckiebot will follow the ball around. Don't move ball to quickly, the program is written in python in one day, it's not optimized and the lag is tremendous. If you move ball to close to the duckiebot, it will scare it away and the duckiebot will move in reverse for some time. Because of the lag, the duckiebot will probably not be scared of the ball while it is moving towards it. This one probably won't work at the first try, pleas, write me (Yury) to demonstrate it for you if you have any problems.

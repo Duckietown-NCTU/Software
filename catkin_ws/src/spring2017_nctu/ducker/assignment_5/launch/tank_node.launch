@@ -1,0 +1,6 @@
+<launch>
+    <arg name="pkg_name" value="assignment_5"/>
+    <arg name="node_name" default="tank_like_joy_mapper"/>
+
+    <node name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen" />
+</launch>
