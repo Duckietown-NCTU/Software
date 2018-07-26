@@ -1,0 +1,64 @@
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+\title{\LARGE \bf
+Robotic Vision Assignment 2
+}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Machine Learning Approach to Visual Perception of Forest Trails for Mobile Robots}
+
+Abstract: 
+    We study the problem of perceiving forest or mountain trails from a single monocular image acquired from the viewpoint of a robot traveling on the trail itself. Previous literature focused on trail segmentation, and used low-level features such as image saliency or appearance contrast; we propose a different approach based on a Deep Neural Network used as a supervised image classifier. By operating on the whole image at once, our system outputs the main direction of the trail compared to the viewing direction. Qualitative and quantitative results computed on a large real-world dataset (which we provide for download) show that our approach outperforms alternatives, and yields an accuracy comparable to the accuracy of humans that are tested on the same image classification task. Preliminary results on using this information for quadrotor control in unseen trails are reported. To the best of our knowledge, this is the first paper that describes an approach to perceive forest trials which is demonstrated on a quadrotor micro aerial vehicle.\cite{giusti2016machine}
+
+
+\section{A nested PID steering control for lane keeping in vision based autonomous vehicles}
+
+Abstract:
+    In this paper a nested PID steering control for lane keeping in vision based autonomous vehicles is designed to perform path following in the case of roads with an uncertain curvature. The control input is the steering wheel angle: it is designed on the basis of the yaw rate, measured by a gyroscope, and the lateral offset, measured by the vision system as the distance between the road centerline and a virtual point at a fixed distance from the vehicle. No lateral acceleration and no lateral speed measurements are required. A PI active front steering control on the yaw rate tracking error is used to reject constant disturbances and the overall effect of parameter variations while improving vehicle steering dynamics. The yaw rate reference is viewed as the control input in an external control loop: it is designed using a PID control on the lateral offset to reject the disturbances on the curvature which increase linearly with respect to time. The robustness is investigated with respect to speed variations and uncertain vehicle physical parameters: it is shown that the controlled system is asymptotically stable for all perturbations in the range of interest. Several simulations are carried out on a standard big sedan CarSim vehicle model to explore the robustness with respect to unmodelled effects such as combined lateral and longitudinal tire forces, pitch and roll. The simulations show reduced lateral offset and new stable mu-split braking manoeuvres in comparison with the CarSim model predictive steering controller implemented by CarSim.\cite{5160343}
+
+\section{An Empirical Evaluation of Deep Learning on Highway Driving}
+
+Abstract:
+    Numerous groups have applied a variety of deep learning techniques to computer vision problems in highway perception scenarios. In this paper, we presented a number of empirical evaluations of recent deep learning advances. Computer vision, combined with deep learning, has the potential to bring about a relatively inexpensive, robust solution to autonomous driving. To prepare deep learning for industry uptake and practical applications, neural networks will require large data sets that represent all possible driving environments and scenarios. We collect a large data set of highway data and apply deep learning and computer vision algorithms to problems such as car and lane detection. We show how existing convolutional neural networks (CNNs) can be used to perform lane and vehicle detection while running at frame rates required for a real-time system. Our results lend credence to the hypothesis that deep learning holds promise for autonomous driving\cite{DBLP:journals/corr/HuvalWTKSPARMCM15}
+
+\section{Deep Neural Networks for Object Detection}
+
+Abstract:
+    Deep Neural Networks (DNNs) have recently shown outstanding performance on the task of whole image classification. In this paper we go one step further and address the problem of object detection -- not only classifying but also precisely localizing objects of various classes using DNNs. We present a simple and yet powerful formulation of object detection as a regression to object masks. We define a multi-scale inference procedure which is able to produce a high-resolution object detection at a low cost by a few network applications. The approach achieves state-of-the-art performance on Pascal 2007 VOC.\cite{NIPS2013_5207}
+
+\section{A system for real-time detection and tracking of vehicles from a single car-mounted came     ra}
+
+Abstract:
+    A novel system for detection and tracking of vehicles from a single car-mounted camera is presented. The core of the system are high-performance vision algorithms: the WaldBoost detector [1] and the TLD tracker [2] that are scheduled so that a real-time performance is achieved. The vehicle monitoring system is evaluated on a new dataset collected on Italian motorways which is provided with approximate ground truth (GT0) obtained from laser scans. For a wide range of distances, the recall and precision of detection for cars are excellent. Statistics for trucks are also reported. The dataset with the ground truth is made public.\cite{6338748}
+
+%\section{USING THE TEMPLATE}
+
+%\section{CONCLUSIONS}
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+%\section*{APPENDIX}
+
+%\section*{ACKNOWLEDGMENT}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{0560072_egbib}
+
+\end{document}
