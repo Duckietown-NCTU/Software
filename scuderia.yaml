@@ -270,6 +270,10 @@ buyme:
   name: ARG-car12
 
 hercules:
+  name: hercule
+
+jackie:
+  name: ARG-car21
   name: hercules
 
 gcdog:
