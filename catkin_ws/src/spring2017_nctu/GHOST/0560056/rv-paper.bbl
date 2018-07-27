@@ -1,0 +1,48 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{girshick2016region}
+R.~Girshick, J.~Donahue, T.~Darrell, and J.~Malik, ``Region-based convolutional
+  networks for accurate object detection and segmentation,'' \emph{IEEE
+  transactions on pattern analysis and machine intelligence}, vol.~38, no.~1,
+  pp. 142--158, 2016.
+
+\bibitem{malisiewicz2011ensemble}
+T.~Malisiewicz, A.~Gupta, and A.~A. Efros, ``Ensemble of exemplar-svms for
+  object detection and beyond,'' in \emph{Computer Vision (ICCV), 2011 IEEE
+  International Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2011, pp. 89--96.
+
+\bibitem{krizhevsky2012imagenet}
+A.~Krizhevsky, I.~Sutskever, and G.~E. Hinton, ``Imagenet classification with
+  deep convolutional neural networks,'' in \emph{Advances in neural information
+  processing systems}, 2012, pp. 1097--1105.
+
+\bibitem{li2016deep}
+G.~Li and Y.~Yu, ``Deep contrast learning for salient object detection,'' in
+  \emph{Proceedings of the IEEE Conference on Computer Vision and Pattern
+  Recognition}, 2016, pp. 478--487.
+
+\bibitem{szegedy2013deep}
+C.~Szegedy, A.~Toshev, and D.~Erhan, ``Deep neural networks for object
+  detection,'' in \emph{Advances in Neural Information Processing Systems},
+  2013, pp. 2553--2561.
+
+\end{thebibliography}
